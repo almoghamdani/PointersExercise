@@ -11,8 +11,8 @@ void* advanceVoidPointer(void* ptr, int bytes);
 // Task 2: Pointer arithmetic with different integer types
 int* castAndAdvance(char* ptr, int offset);
 
-// Task 3: Pointer arithmetic with function pointers
-int (* advanceFunctionPointer(int (*funcPtr)(int), int offset))(int);
+// Task 3: Pointer arithmetic with character arrays
+char* advanceCharArrayPointer(char* ptr, int offset);
 
 // Task 4: Complex pointer arithmetic with multiple casts
 double* complexPointerArithmetic(int* intPtr, long offset);

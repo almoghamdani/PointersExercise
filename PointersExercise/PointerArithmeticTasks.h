@@ -17,7 +17,7 @@ public:
     std::string getDescription() const override;
 };
 
-// Task 3: Pointer arithmetic with function pointers
+// Task 3: Pointer arithmetic with character arrays
 class PointerArithmeticTask3 : public Task
 {
 public:

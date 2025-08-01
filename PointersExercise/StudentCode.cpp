@@ -22,9 +22,9 @@ int* castAndAdvance(char* ptr, int offset)
     return nullptr;
 }
 
-// Task 3: Pointer arithmetic with function pointers
-// TODO: Implement this function to advance a function pointer by offset
-int (* advanceFunctionPointer(int (*funcPtr)(int), int offset))(int)
+// Task 3: Pointer arithmetic with character arrays
+// TODO: Implement this function to advance a character array pointer by offset
+char* advanceCharArrayPointer(char* ptr, int offset)
 {
     // Your code here
     return nullptr;

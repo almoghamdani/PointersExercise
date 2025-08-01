@@ -5,11 +5,6 @@
 #include <vector>
 #include <string>
 
-// Helper function for Task 3
-int testFunction1(int x) { return x * 2; }
-int testFunction2(int x) { return x + 10; }
-int testFunction3(int x) { return x - 5; }
-
 // Helper functions for Task 15
 int multiplyBy2(int x) { return x * 2; }
 int add10(int x) { return x + 10; }
@@ -104,32 +99,34 @@ void PointerArithmeticTask2::execute()
     }
 }
 
-// Task 3: Pointer arithmetic with function pointers
+// Task 3: Pointer arithmetic with character arrays
 std::string PointerArithmeticTask3::getDescription() const
 {
-    return "Implement advanceFunctionPointer() to advance a function pointer by offset";
+    return "Implement advanceCharArrayPointer() to advance a character array pointer by offset";
 }
 
 void PointerArithmeticTask3::execute()
 {
     displayTaskInfo();
 
-    int (*funcArray[])(int) = {testFunction1, testFunction2, testFunction3};
-    int (*funcPtr)(int) = funcArray[0];
-    int offset = 1;
+    char charArray[] = "Hello World!";
+    char* charPtr = charArray;
+    int offset = 6;
 
-    std::cout << "Original function pointer: testFunction1" << std::endl;
-    std::cout << "Offset: " << offset << std::endl;
+    std::cout << "Original character array: \"" << charArray << "\"" << std::endl;
+    std::cout << "Original pointer points to: '" << *charPtr << "'" << std::endl;
+    std::cout << "Offset: " << offset << " characters" << std::endl;
 
     // Test student implementation
-    int (*result)(int) = advanceFunctionPointer(funcPtr, offset);
+    char* result = advanceCharArrayPointer(charPtr, offset);
 
     if (result != nullptr)
     {
-        std::cout << "After advancing, function pointer: " << (result == testFunction2 ? "testFunction2" : "unknown") <<
-                std::endl;
-        bool passed = verifyResult(result == funcArray[1], "Function pointer correctly advanced");
-        passed &= verifyResult(result(5) == 15, "Advanced function pointer works correctly (5+10=15)");
+        std::cout << "After advancing, pointer points to: '" << *result << "'" << std::endl;
+        std::cout << "String from new position: \"" << result << "\"" << std::endl;
+        bool passed = verifyResult(result == charPtr + offset, "Character pointer correctly advanced");
+        passed &= verifyResult(*result == 'W', "Pointer points to correct character ('W')");
+        passed &= verifyResult(strcmp(result, "World!") == 0, "String from new position is correct");
 
         if (passed)
         {
