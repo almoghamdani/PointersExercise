@@ -7,16 +7,6 @@
 #include <iomanip>
 #include <cstddef>
 
-// Helper function for Task 3
-int testFunction1(int x) { return x * 2; }
-int testFunction2(int x) { return x + 10; }
-int testFunction3(int x) { return x - 5; }
-
-// Helper functions (no longer used after task updates)
-// int multiplyBy2(int x) { return x * 2; }
-// int add10(int x) { return x + 10; }
-// int subtract5(int x) { return x - 5; }
-
 // Task 1: Pointer arithmetic with void pointers and casts
 std::string PointerArithmeticTask1::getDescription() const
 {
