@@ -24,6 +24,8 @@ int* castAndAdvance(char* ptr, int offset)
 
 // Task 3: Multi-dimensional array traversal with pointer arithmetic
 // TODO: Implement this function to traverse a 2D array diagonally using pointer arithmetic
+// Starting from the top-left corner (0,0), move diagonally down-right through the array
+// and calculate the sum of all elements encountered along this diagonal path
 int traverse2DArrayDiagonal(int** array2D, int rows, int cols)
 {
     // Your code here
@@ -32,6 +34,8 @@ int traverse2DArrayDiagonal(int** array2D, int rows, int cols)
 
 // Task 4: Bit manipulation with pointer arithmetic
 // TODO: Implement this function to set specific bits in a uint32_t array using pointer arithmetic
+// Starting from the element at startIndex, apply the bitMask to each uint32_t element
+// by performing a bitwise OR operation between the element and the bitMask
 void setBitsInArray(uint32_t* array, size_t size, uint32_t bitMask, size_t startIndex)
 {
     // Your code here
@@ -54,6 +58,8 @@ uint32_t extractValueFromMemoryLayout(const void* memoryPtr, size_t offset)
 
 // Task 7: Function pointer table traversal
 // TODO: Implement this function to traverse and execute function pointers
+// Call each function in the funcTable array with parameters a and b, then
+// calculate and return the sum of all function return values
 int executeFunctionTable(MathFunction* funcTable, int size, int a, int b)
 {
     // Your code here
@@ -62,6 +68,8 @@ int executeFunctionTable(MathFunction* funcTable, int size, int a, int b)
 
 // Task 8: First set bit search in uint32_t array
 // TODO: Implement this function to find first set bit and return byte index
+// Search through the array from beginning to end, examining each uint32_t value
+// Return the byte index (0-based) of the first element that has at least one bit set to 1
 size_t findFirstSetBitIndex(const uint32_t* array, size_t size)
 {
     // Your code here
@@ -78,6 +86,9 @@ void assignValueThroughPointer(int** ptrToPtr, int value)
 // Task 10: Search for pointer with specific bits set in array of pointers
 // TODO: Implement this function to search through an array of pointers to uint32_t
 // and find one that points to a value with specific bits set
+// Search through the pointerArray and find the first pointer that points to a uint32_t value
+// where ALL the bits specified in requiredBits are set (1). Store the array index in foundIndex
+// and store the value of any additional bits that are set (beyond requiredBits) in otherBitsSet
 bool findPointerWithBitsSet(uint32_t** pointerArray,
                             size_t size,
                             uint32_t requiredBits,
@@ -97,6 +108,8 @@ void swapPointers(int** ptr1, int** ptr2)
 
 // Task 12: Return multiple values through pointer-to-pointer
 // TODO: Implement this function to find min and max values and assign them through pointers
+// Find the minimum and maximum values in the array, then assign the addresses of these
+// values to the pointer-to-pointer parameters minPtr and maxPtr respectively
 void getMinMax(int arr[], int size, int** minPtr, int** maxPtr)
 {
     // Your code here
@@ -111,6 +124,8 @@ void insertNodeAtBeginning(Node** head, int value)
 
 // Task 14: Complex pointer-to-pointer linked list manipulation
 // TODO: Implement this function to reverse a linked list in-place using pointer-to-pointer
+// Reverse the linked list by changing the direction of all next pointers, then
+// return the total number of nodes that were successfully reversed
 int reverseLinkedList(ListNode** head)
 {
     // Your code here
@@ -119,6 +134,8 @@ int reverseLinkedList(ListNode** head)
 
 // Task 15: Pointer-to-pointer dynamic array management
 // TODO: Implement this function to add a value to a dynamic array, growing it if necessary
+// Add the value to the end of the dynamic array. If the array is full, allocate a new
+// array with double the capacity, copy existing elements, and update the array pointer
 bool addToDynamicArray(DynamicArray** array, int value)
 {
     // Your code here
@@ -127,6 +144,8 @@ bool addToDynamicArray(DynamicArray** array, int value)
 
 // Task 16: Complex pointer-to-pointer matrix manipulation
 // TODO: Implement this function to transpose a 2D matrix in-place using pointer arithmetic
+// Transpose the matrix by swapping elements across the main diagonal (i,j becomes j,i)
+// Only works for square matrices. Return true if successful, false if matrix is not square
 bool transposeMatrixInPlace(Matrix2D** matrix)
 {
     // Your code here
@@ -135,6 +154,8 @@ bool transposeMatrixInPlace(Matrix2D** matrix)
 
 // Task 17: Extract wstring from vector<uint8_t>
 // TODO: Implement this function to extract a wstring from a vector at the given offset
+// Extract a wide string from the data vector starting at the specified offset
+// The string is stored as a sequence of wide characters (wchar_t) in the byte vector
 std::wstring extractWStringFromVector(const std::vector<uint8_t>& data, size_t offset)
 {
     // Your code here
@@ -143,6 +164,8 @@ std::wstring extractWStringFromVector(const std::vector<uint8_t>& data, size_t o
 
 // Task 18: Create vector<uint8_t> from uint32_t
 // TODO: Implement this function to create a vector from a uint32_t value
+// Convert the uint32_t value into a vector of 4 bytes, storing each byte of the value
+// in little-endian order (least significant byte first)
 std::vector<uint8_t> createVectorFromUint32(uint32_t value)
 {
     // Your code here
@@ -151,6 +174,8 @@ std::vector<uint8_t> createVectorFromUint32(uint32_t value)
 
 // Task 19: Extract uint32_t from vector<uint8_t>
 // TODO: Implement this function to extract a uint32_t from a vector at the given offset
+// Extract a uint32_t value from the data vector starting at the specified offset
+// The value is stored as 4 consecutive bytes in little-endian order
 uint32_t extractUint32FromVector(const std::vector<uint8_t>& data, size_t offset)
 {
     // Your code here
@@ -159,6 +184,8 @@ uint32_t extractUint32FromVector(const std::vector<uint8_t>& data, size_t offset
 
 // Task 20: Create vector<uint8_t> from POD struct
 // TODO: Implement this function to create a vector from a PODStruct
+// Serialize the PODStruct into a vector of bytes by copying the memory layout
+// of the struct directly into the vector, maintaining the exact byte representation
 std::vector<uint8_t> createVectorFromPOD(const PODStruct& pod)
 {
     // Your code here
@@ -167,6 +194,8 @@ std::vector<uint8_t> createVectorFromPOD(const PODStruct& pod)
 
 // Task 21: Extract POD struct from vector<uint8_t>
 // TODO: Implement this function to extract a PODStruct from a vector at the given offset
+// Deserialize a PODStruct from the data vector starting at the specified offset
+// Reconstruct the struct by copying bytes from the vector into the struct's memory layout
 PODStruct extractPODFromVector(const std::vector<uint8_t>& data, size_t offset)
 {
     // Your code here
@@ -175,6 +204,8 @@ PODStruct extractPODFromVector(const std::vector<uint8_t>& data, size_t offset)
 
 // Task 22: Convert vector<uint8_t> to vector<uint32_t>
 // TODO: Implement this function to convert a vector of uint8_t to uint32_t
+// Convert the byte vector to a vector of uint32_t values by grouping every 4 bytes
+// into a single uint32_t value, reading bytes in little-endian order
 std::vector<uint32_t> convertToUint32Vector(const std::vector<uint8_t>& data)
 {
     // Your code here
@@ -183,6 +214,8 @@ std::vector<uint32_t> convertToUint32Vector(const std::vector<uint8_t>& data)
 
 // Task 23: Convert vector<uint32_t> to vector<uint8_t>
 // TODO: Implement this function to convert a vector of uint32_t to uint8_t
+// Convert the uint32_t vector to a byte vector by expanding each uint32_t into 4 bytes
+// Store each uint32_t value in little-endian order (least significant byte first)
 std::vector<uint8_t> convertToUint8Vector(const std::vector<uint32_t>& data)
 {
     // Your code here
@@ -191,6 +224,8 @@ std::vector<uint8_t> convertToUint8Vector(const std::vector<uint32_t>& data)
 
 // Task 24: Insert wstring into vector<uint8_t> at offset
 // TODO: Implement this function to insert a wstring into a vector at the given offset
+// Insert the wide string into the data vector starting at the specified offset
+// Convert each wide character to its byte representation and store it in the vector
 void insertWStringIntoVector(std::vector<uint8_t>& data, const std::wstring& str, size_t offset)
 {
     // Your code here
@@ -198,6 +233,8 @@ void insertWStringIntoVector(std::vector<uint8_t>& data, const std::wstring& str
 
 // Task 25: Complex vector data structure with variable-length fields
 // TODO: Implement this function to extract data from a complex vector structure
+// Parse the data vector to find a field with the specified fieldId and extract its data
+// The vector contains a sequence of field headers followed by their corresponding data
 std::vector<uint8_t> extractVectorDataField(const std::vector<uint8_t>& data, uint16_t fieldId)
 {
     // Your code here
@@ -206,6 +243,8 @@ std::vector<uint8_t> extractVectorDataField(const std::vector<uint8_t>& data, ui
 
 // Task 26: Multi-dimensional vector manipulation with pointer arithmetic
 // TODO: Implement this function to convert a 1D vector to a 2D matrix representation
+// Convert the 1D data vector into a 2D matrix with the specified rows and columns
+// Allocate and populate the matrix structure, mapping vector elements to matrix positions
 bool convertVectorToMatrix(const std::vector<uint32_t>& data, size_t rows, size_t cols, VectorMatrix** matrix)
 {
     // Your code here
@@ -214,6 +253,8 @@ bool convertVectorToMatrix(const std::vector<uint32_t>& data, size_t rows, size_
 
 // Task 27: Complex vector serialization with nested structures
 // TODO: Implement this function to serialize a complex nested structure into a vector<uint8_t>
+// Serialize the nested structure into a byte vector by flattening all nested data
+// Include all fields from the nested structure and its contained objects in the serialized form
 std::vector<uint8_t> serializeNestedStruct(const NestedStruct& nested)
 {
     // Your code here
@@ -222,6 +263,8 @@ std::vector<uint8_t> serializeNestedStruct(const NestedStruct& nested)
 
 // Task 28: Vector-based binary tree serialization
 // TODO: Implement this function to serialize a binary tree into a vector<uint8_t>
+// Serialize the binary tree into a byte vector using a depth-first traversal approach
+// Store each node's data and structure information to allow reconstruction of the tree
 std::vector<uint8_t> serializeBinaryTree(const BinaryTreeNode* root)
 {
     // Your code here
@@ -229,6 +272,8 @@ std::vector<uint8_t> serializeBinaryTree(const BinaryTreeNode* root)
 }
 
 // TODO: Implement this function to deserialize a binary tree from a vector<uint8_t>
+// Reconstruct the binary tree from the serialized byte vector data
+// Parse the data and rebuild the tree structure with the same node relationships
 BinaryTreeNode* deserializeBinaryTree(const std::vector<uint8_t>& data)
 {
     // Your code here
@@ -237,6 +282,8 @@ BinaryTreeNode* deserializeBinaryTree(const std::vector<uint8_t>& data)
 
 // Task 29: Complex vector data encryption
 // TODO: Implement this function to encrypt vector data using XOR encryption
+// Encrypt the data vector using XOR with the provided key, then return an EncryptedData
+// structure containing the encrypted bytes, key, and original data size
 EncryptedData encryptVectorData(const std::vector<uint8_t>& data, uint32_t key)
 {
     // Your code here
@@ -244,6 +291,8 @@ EncryptedData encryptVectorData(const std::vector<uint8_t>& data, uint32_t key)
 }
 
 // TODO: Implement this function to decrypt vector data
+// Decrypt the encrypted data using XOR with the provided key, restoring the original
+// byte vector that was encrypted
 std::vector<uint8_t> decryptVectorData(const EncryptedData& encrypted, uint32_t key)
 {
     // Your code here
@@ -252,6 +301,8 @@ std::vector<uint8_t> decryptVectorData(const EncryptedData& encrypted, uint32_t 
 
 // Task 30: Extract wstring from complex struct at data offset
 // TODO: Implement this function to extract a wstring from a ComplexStruct where data follows after the struct
+// Extract a wide string that is stored immediately after the ComplexStruct in memory
+// Use the struct's dataOffset and dataLength fields to locate and extract the string data
 std::wstring extractWStringFromComplexStruct(const ComplexStruct* structPtr)
 {
     // Your code here
@@ -260,6 +311,8 @@ std::wstring extractWStringFromComplexStruct(const ComplexStruct* structPtr)
 
 // Task 31: Extract raw data from complex struct with length validation
 // TODO: Implement this function to extract raw data from a ComplexStruct where data follows after the struct
+// Extract raw byte data that is stored immediately after the ComplexStruct in memory
+// Use the struct's dataOffset and dataLength fields to locate and extract the raw data
 std::vector<uint8_t> extractRawDataFromComplexStruct(const ComplexStruct* structPtr)
 {
     // Your code here
@@ -268,6 +321,8 @@ std::vector<uint8_t> extractRawDataFromComplexStruct(const ComplexStruct* struct
 
 // Task 32: Extract wstring from nested struct traversal
 // TODO: Implement this function to extract a wstring by traversing to a ComplexStruct at structOffset where data follows after the struct
+// Navigate to a ComplexStruct located at the specified offset from the base pointer
+// Then extract the wide string that follows immediately after that struct in memory
 std::wstring extractWStringFromNestedStruct(const void* basePtr, uint32_t structOffset)
 {
     // Your code here
@@ -276,6 +331,8 @@ std::wstring extractWStringFromNestedStruct(const void* basePtr, uint32_t struct
 
 // Task 33: Extract variable length data with offset calculation
 // TODO: Implement this function to extract variable length data using offset and length from basePtr
+// Extract a variable-length block of data from memory starting at the specified offset
+// from the base pointer, copying exactly dataLength bytes into the returned vector
 std::vector<uint8_t> extractVariableLengthData(const void* basePtr, uint32_t dataOffset, uint32_t dataLength)
 {
     // Your code here
