@@ -12,10 +12,10 @@ int testFunction1(int x) { return x * 2; }
 int testFunction2(int x) { return x + 10; }
 int testFunction3(int x) { return x - 5; }
 
-// Helper functions for Task 15
-int multiplyBy2(int x) { return x * 2; }
-int add10(int x) { return x + 10; }
-int subtract5(int x) { return x - 5; }
+// Helper functions (no longer used after task updates)
+// int multiplyBy2(int x) { return x * 2; }
+// int add10(int x) { return x + 10; }
+// int subtract5(int x) { return x - 5; }
 
 // Task 1: Pointer arithmetic with void pointers and casts
 std::string PointerArithmeticTask1::getDescription() const
@@ -118,16 +118,20 @@ void PointerArithmeticTask3::execute()
 
     // Create a 3x3 2D array
     int** array2D = new int*[3];
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; ++i)
+    {
         array2D[i] = new int[3];
-        for (int j = 0; j < 3; ++j) {
+        for (int j = 0; j < 3; ++j)
+        {
             array2D[i][j] = i * 3 + j + 1; // Fill with 1-9
         }
     }
 
     std::cout << "2D Array (3x3):" << std::endl;
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
+    for (int i = 0; i < 3; ++i)
+    {
+        for (int j = 0; j < 3; ++j)
+        {
             std::cout << array2D[i][j] << " ";
         }
         std::cout << std::endl;
@@ -150,7 +154,8 @@ void PointerArithmeticTask3::execute()
     }
 
     // Cleanup
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; ++i)
+    {
         delete[] array2D[i];
     }
     delete[] array2D;
@@ -171,7 +176,8 @@ void PointerArithmeticTask4::execute()
     size_t startIndex = 1; // Start from second element
 
     std::cout << "Original array: ";
-    for (size_t i = 0; i < 4; ++i) {
+    for (size_t i = 0; i < 4; ++i)
+    {
         std::cout << "0x" << std::hex << array[i] << " ";
     }
     std::cout << std::dec << std::endl;
@@ -182,7 +188,8 @@ void PointerArithmeticTask4::execute()
     setBitsInArray(array, 4, bitMask, startIndex);
 
     std::cout << "After setting bits: ";
-    for (size_t i = 0; i < 4; ++i) {
+    for (size_t i = 0; i < 4; ++i)
+    {
         std::cout << "0x" << std::hex << array[i] << " ";
     }
     std::cout << std::dec << std::endl;
@@ -315,11 +322,12 @@ void PointerArithmeticTask8::execute()
 {
     displayTaskInfo();
 
-    uint32_t array[] = {0x00000000, 0x00000000, 0x00000008, 0x00000000}; // Bit 3 set in third element
+    uint32_t array[] = {0x00000000, 0x00000000, 0x08000000, 0x00000000}; // Bit 3 set in third element
     size_t size = 4;
 
     std::cout << "Array: ";
-    for (size_t i = 0; i < size; ++i) {
+    for (size_t i = 0; i < size; ++i)
+    {
         std::cout << "0x" << std::hex << array[i] << " ";
     }
     std::cout << std::dec << std::endl;
@@ -379,36 +387,56 @@ void PointerArithmeticTask9::execute()
 // Task 10: Allocate memory through pointer-to-pointer
 std::string PointerArithmeticTask10::getDescription() const
 {
-    return "Implement allocateMemory() to allocate memory and assign it through pointer-to-pointer";
+    return "Implement findPointerWithBitsSet() to search for a pointer pointing to a value with specific bits set";
 }
 
 void PointerArithmeticTask10::execute()
 {
     displayTaskInfo();
 
-    int* ptr = nullptr;
-    int** ptrToPtr = &ptr;
-    int size = 5;
+    // Create test data with various bit patterns
+    uint32_t values[] = {
+        0x00000000,
+        0x0000000F,
+        0x000000F0,
+        0x00000F00,
+        0x0000F000,
+        0x000F0000,
+        0x00F00000,
+        0x0F000000
+    };
+    uint32_t* pointers[8];
 
-    std::cout << "Original pointer: " << (ptr == nullptr ? "nullptr" : "not nullptr") << std::endl;
-    std::cout << "Allocating " << size << " integers..." << std::endl;
+    for (size_t i = 0; i < 8; ++i)
+    {
+        pointers[i] = &values[i];
+    }
+
+    uint32_t requiredBits = 0x0000000F; // Look for values with bits 0-3 set
+    size_t foundIndex = 0;
+    uint32_t otherBitsSet = 0;
+
+    std::cout << "Searching for pointer to value with bits 0x" << std::hex << requiredBits << " set" << std::dec <<
+            std::endl;
+    std::cout << "Values in array: ";
+    for (size_t i = 0; i < 8; ++i)
+    {
+        std::cout << "0x" << std::hex << values[i] << " ";
+    }
+    std::cout << std::dec << std::endl;
 
     // Test student implementation
-    allocateMemory(ptrToPtr, size);
+    bool found = findPointerWithBitsSet(pointers, 8, requiredBits, &foundIndex, &otherBitsSet);
 
-    if (*ptrToPtr != nullptr)
+    if (found)
     {
-        std::cout << "After allocation: " << (*ptrToPtr == nullptr ? "nullptr" : "not nullptr") << std::endl;
+        std::cout << "Found pointer at index: " << foundIndex << std::endl;
+        std::cout << "Value at that pointer: 0x" << std::hex << values[foundIndex] << std::dec << std::endl;
+        std::cout << "Other bits set: 0x" << std::hex << otherBitsSet << std::dec << std::endl;
 
-        // Test that we can write to the allocated memory
-        for (int i = 0; i < size; ++i)
-        {
-            (*ptrToPtr)[i] = i * 10;
-        }
-
-        bool passed = verifyResult(*ptrToPtr != nullptr, "Memory successfully allocated");
-        passed &= verifyResult((*ptrToPtr)[0] == 0, "Can write to allocated memory");
-        passed &= verifyResult((*ptrToPtr)[size - 1] == (size - 1) * 10, "Can write to end of allocated memory");
+        bool passed = verifyResult(foundIndex == 1, "Correct index found (value 0x0000000F)");
+        passed &= verifyResult(otherBitsSet == 0x00000000, "No other bits set in the found value");
+        passed &= verifyResult((values[foundIndex] & requiredBits) == requiredBits, "Required bits are actually set");
 
         if (passed)
         {
@@ -418,13 +446,10 @@ void PointerArithmeticTask10::execute()
         {
             std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
         }
-
-        // Clean up
-        delete[] *ptrToPtr;
     }
     else
     {
-        std::cout << "\033[31m[FAILED]\033[0m Memory allocation failed - implementation incomplete" << std::endl;
+        std::cout << "\033[31m[FAILED]\033[0m No pointer found - implementation incomplete" << std::endl;
     }
 }
 
@@ -562,105 +587,229 @@ void PointerArithmeticTask13::execute()
     }
 }
 
-// Task 14: Pointer-to-pointer array allocation
+// Task 14: Complex pointer-to-pointer linked list manipulation
 std::string PointerArithmeticTask14::getDescription() const
 {
-    return "Implement allocate2DArray() to allocate a 2D array through pointer-to-pointer";
+    return "Implement reverseLinkedList() to reverse a linked list in-place using pointer-to-pointer";
 }
 
 void PointerArithmeticTask14::execute()
 {
     displayTaskInfo();
 
-    int** array2D = nullptr;
-    int*** ptrToArray2D = &array2D;
-    int rows = 3, cols = 4;
-
-    std::cout << "Original array2D: " << (array2D == nullptr ? "nullptr" : "not nullptr") << std::endl;
-    std::cout << "Allocating " << rows << "x" << cols << " array..." << std::endl;
-
-    // Test student implementation
-    allocate2DArray(ptrToArray2D, rows, cols);
-
-    if (array2D != nullptr)
+    // Create a linked list: 1 -> 2 -> 3 -> 4 -> 5
+    ListNode* head = new ListNode{1, nullptr};
+    ListNode* current = head;
+    for (int i = 2; i <= 5; ++i)
     {
-        std::cout << "After allocation: " << (array2D == nullptr ? "nullptr" : "not nullptr") << std::endl;
+        current->next = new ListNode{i, nullptr};
+        current = current->next;
+    }
 
-        // Test that we can write to the allocated memory
-        for (int i = 0; i < rows; ++i)
-        {
-            for (int j = 0; j < cols; ++j)
-            {
-                array2D[i][j] = i * 10 + j;
-            }
-        }
+    std::cout << "Original list: ";
+    current = head;
+    while (current != nullptr)
+    {
+        std::cout << current->value << " ";
+        current = current->next;
+    }
+    std::cout << std::endl;
 
-        bool passed = verifyResult(array2D != nullptr, "2D array successfully allocated");
-        passed &= verifyResult(array2D[0] != nullptr, "First row successfully allocated");
-        passed &= verifyResult(array2D[rows - 1] != nullptr, "Last row successfully allocated");
-        passed &= verifyResult(array2D[0][0] == 0, "Can write to first element");
-        passed &= verifyResult(array2D[rows - 1][cols - 1] == (rows - 1) * 10 + (cols - 1),
-                               "Can write to last element");
+    ListNode** headPtr = &head;
+    int nodeCount = reverseLinkedList(headPtr);
 
-        if (passed)
-        {
-            std::cout << "\033[32m[SUCCESS]\033[0m Task 14 completed successfully!" << std::endl;
-        }
-        else
-        {
-            std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
-        }
+    std::cout << "Reversed list: ";
+    current = head;
+    while (current != nullptr)
+    {
+        std::cout << current->value << " ";
+        current = current->next;
+    }
+    std::cout << std::endl;
+    std::cout << "Nodes processed: " << nodeCount << std::endl;
 
-        // Clean up
-        for (int i = 0; i < rows; ++i)
+    bool passed = verifyResult(nodeCount == 5, "Correct number of nodes processed");
+
+    // Verify the list is reversed: 5 -> 4 -> 3 -> 2 -> 1
+    current = head;
+    int expectedValues[] = {5, 4, 3, 2, 1};
+    for (int i = 0; i < 5; ++i)
+    {
+        if (current == nullptr || current->value != expectedValues[i])
         {
-            delete[] array2D[i];
+            passed = false;
+            break;
         }
-        delete[] array2D;
+        current = current->next;
+    }
+    passed &= verifyResult(current == nullptr, "List properly terminated");
+
+    if (passed)
+    {
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 14 completed successfully!" << std::endl;
     }
     else
     {
-        std::cout << "\033[31m[FAILED]\033[0m 2D array allocation failed - implementation incomplete" << std::endl;
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
+    }
+
+    // Clean up
+    while (head != nullptr)
+    {
+        ListNode* temp = head;
+        head = head->next;
+        delete temp;
     }
 }
 
-// Task 15: Pointer-to-pointer function pointer
+// Task 15: Pointer-to-pointer dynamic array management
 std::string PointerArithmeticTask15::getDescription() const
 {
-    return "Implement assignFunctionPointer() to assign a function pointer based on choice";
+    return "Implement addToDynamicArray() to manage a dynamic array with pointer-to-pointer";
 }
 
 void PointerArithmeticTask15::execute()
 {
     displayTaskInfo();
 
-    int (*funcPtr)(int) = nullptr;
-    int (**ptrToFuncPtr)(int) = &funcPtr;
-    int choice = 1;
-    int testValue = 5;
+    DynamicArray* array = new DynamicArray{nullptr, 0, 0};
+    DynamicArray** arrayPtr = &array;
 
-    std::cout << "Original function pointer: " << (funcPtr == nullptr ? "nullptr" : "not nullptr") << std::endl;
-    std::cout << "Choice: " << choice << " (should assign multiplyBy2)" << std::endl;
+    std::cout << "Initial array - size: " << array->size << ", capacity: " << array->capacity << std::endl;
+
+    // Add several values to test dynamic growth
+    int values[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+    int numValues = 10;
+
+    for (int i = 0; i < numValues; ++i)
+    {
+        bool success = addToDynamicArray(arrayPtr, values[i]);
+        if (!success)
+        {
+            std::cout << "Failed to add value " << values[i] << std::endl;
+            break;
+        }
+    }
+
+    std::cout << "After adding " << numValues << " values:" << std::endl;
+    std::cout << "Array size: " << array->size << std::endl;
+    std::cout << "Array capacity: " << array->capacity << std::endl;
+
+    if (array->data != nullptr)
+    {
+        std::cout << "Array contents: ";
+        for (size_t i = 0; i < array->size; ++i)
+        {
+            std::cout << array->data[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    bool passed = verifyResult(array->size == numValues, "All values were added");
+    passed &= verifyResult(array->capacity >= array->size, "Capacity is sufficient");
+    passed &= verifyResult(array->data != nullptr, "Array data was allocated");
+
+    if (passed)
+    {
+        // Verify all values are correct
+        for (int i = 0; i < numValues; ++i)
+        {
+            if (array->data[i] != values[i])
+            {
+                passed = false;
+                break;
+            }
+        }
+        passed &= verifyResult(true, "All values are correct");
+    }
+
+    if (passed)
+    {
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 15 completed successfully!" << std::endl;
+    }
+    else
+    {
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
+    }
+
+    // Clean up
+    if (array->data != nullptr)
+    {
+        delete[] array->data;
+    }
+    delete array;
+}
+
+// Task 16: Complex pointer-to-pointer matrix manipulation
+std::string PointerArithmeticTask16::getDescription() const
+{
+    return "Implement transposeMatrixInPlace() to transpose a 2D matrix in-place using pointer arithmetic";
+}
+
+void PointerArithmeticTask16::execute()
+{
+    displayTaskInfo();
+
+    // Create a 3x3 matrix
+    Matrix2D* matrix = new Matrix2D();
+    matrix->rows = 3;
+    matrix->cols = 3;
+    matrix->data = new int*[3];
+
+    for (int i = 0; i < 3; ++i)
+    {
+        matrix->data[i] = new int[3];
+        for (int j = 0; j < 3; ++j)
+        {
+            matrix->data[i][j] = i * 3 + j + 1; // Fill with 1-9
+        }
+    }
+
+    std::cout << "Original 3x3 matrix:" << std::endl;
+    for (int i = 0; i < 3; ++i)
+    {
+        for (int j = 0; j < 3; ++j)
+        {
+            std::cout << matrix->data[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    Matrix2D** matrixPtr = &matrix;
 
     // Test student implementation
-    assignFunctionPointer(ptrToFuncPtr, choice);
+    bool result = transposeMatrixInPlace(matrixPtr);
 
-    if (funcPtr != nullptr)
+    if (result && matrix != nullptr)
     {
-        int result = funcPtr(testValue);
-        std::cout << "After assignment: function(5) = " << result << std::endl;
-        bool passed = verifyResult(funcPtr == multiplyBy2, "Correct function pointer assigned");
-        passed &= verifyResult(result == 10, "Function works correctly (5 * 2 = 10)");
+        std::cout << "Transposed matrix:" << std::endl;
+        for (int i = 0; i < 3; ++i)
+        {
+            for (int j = 0; j < 3; ++j)
+            {
+                std::cout << matrix->data[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
 
-        // Test another choice
-        assignFunctionPointer(ptrToFuncPtr, 2);
-        result = funcPtr(testValue);
-        passed &= verifyResult(funcPtr == add10, "Second function pointer assigned correctly");
-        passed &= verifyResult(result == 15, "Second function works correctly (5 + 10 = 15)");
+        // Verify transposition: original[i][j] should equal transposed[j][i]
+        bool passed = true;
+        for (int i = 0; i < 3; ++i)
+        {
+            for (int j = 0; j < 3; ++j)
+            {
+                int expected = (j * 3 + i + 1); // Expected transposed value
+                if (matrix->data[i][j] != expected)
+                {
+                    passed = false;
+                    break;
+                }
+            }
+        }
 
         if (passed)
         {
-            std::cout << "\033[32m[SUCCESS]\033[0m Task 15 completed successfully!" << std::endl;
+            std::cout << "\033[32m[SUCCESS]\033[0m Task 16 completed successfully!" << std::endl;
         }
         else
         {
@@ -669,48 +818,18 @@ void PointerArithmeticTask15::execute()
     }
     else
     {
-        std::cout << "\033[31m[FAILED]\033[0m Function pointer assignment failed - implementation incomplete" <<
-                std::endl;
+        std::cout << "\033[31m[FAILED]\033[0m Function returned false - implementation incomplete" << std::endl;
     }
-}
 
-// Task 16: Complex pointer-to-pointer arithmetic
-std::string PointerArithmeticTask16::getDescription() const
-{
-    return "Implement advancePointerToPointer() to advance a pointer-to-pointer-to-pointer by offset";
-}
-
-void PointerArithmeticTask16::execute()
-{
-    displayTaskInfo();
-
-    int a = 10, b = 20, c = 30;
-    int* ptr1 = &a;
-    int* ptr2 = &b;
-    int* ptr3 = &c;
-    int** ptrToPtr1 = &ptr1;
-    int** ptrToPtr2 = &ptr2;
-    int** ptrToPtr3 = &ptr3;
-    int*** ptrToPtrToPtr = &ptrToPtr1;
-    int offset = 1;
-
-    std::cout << "Original pointer-to-pointer-to-pointer points to: " << ***ptrToPtrToPtr << std::endl;
-    std::cout << "Offset: " << offset << std::endl;
-
-    // Test student implementation
-    advancePointerToPointer(ptrToPtrToPtr, offset);
-
-    std::cout << "After advancing, points to: " << ***ptrToPtrToPtr << std::endl;
-    bool passed = verifyResult(ptrToPtrToPtr == &ptrToPtr2, "Pointer-to-pointer-to-pointer correctly advanced");
-    passed &= verifyResult(***ptrToPtrToPtr == 20, "Points to correct value (20)");
-
-    if (passed)
+    // Cleanup
+    if (matrix != nullptr)
     {
-        std::cout << "\033[32m[SUCCESS]\033[0m Task 16 completed successfully!" << std::endl;
-    }
-    else
-    {
-        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
+        for (int i = 0; i < 3; ++i)
+        {
+            delete[] matrix->data[i];
+        }
+        delete[] matrix->data;
+        delete matrix;
     }
 }
 
@@ -1053,46 +1172,94 @@ void PointerArithmeticTask24::execute()
     }
 }
 
-// Task 25: Extract wstring from complex struct at data offset
+// Task 25: Complex vector data structure with variable-length fields
 std::string PointerArithmeticTask25::getDescription() const
 {
-    return "Implement extractWStringFromComplexStruct() to extract a wstring from a complex struct";
+    return
+            "Implement extractVectorDataField() to extract data from a complex vector structure with variable-length fields";
 }
 
 void PointerArithmeticTask25::execute()
 {
     displayTaskInfo();
 
-    std::wstring testString = L"Hello World!";
-    size_t dataSize = testString.size() * sizeof(wchar_t);
+    // Create a complex vector structure with multiple fields
+    std::vector<uint8_t> data;
 
-    // Allocate memory for struct + data
-    uint8_t* buffer = new uint8_t[sizeof(ComplexStruct) + dataSize];
-    ComplexStruct* complexStruct = reinterpret_cast<ComplexStruct*>(buffer);
+    // Header
+    VectorDataHeader header;
+    header.magic = 0x12345678;
+    header.version = 1;
+    header.fieldCount = 3;
+    header.totalSize = 0; // Will be calculated
 
-    complexStruct->header = 0x12345678;
-    complexStruct->flags = 0xABCD;
-    complexStruct->dataType = 1; // 1 = wstring
-    complexStruct->dataOffset = 0; // Start at beginning of data after struct
-    complexStruct->dataLength = dataSize; // Size in bytes
+    const auto data_start = sizeof(VectorDataHeader) + sizeof(VectorDataField) * 3;
 
-    // Copy data after the struct
-    uint8_t* dataPtr = buffer + sizeof(ComplexStruct);
-    std::memcpy(dataPtr, testString.data(), dataSize);
+    // Fields
+    VectorDataField fields[3];
+    fields[0] = {1, 0, 1001, data_start + 0, 8}; // Field 1001: 8 bytes
+    fields[1] = {2, 0, 1002, data_start + 8, 16}; // Field 1002: 16 bytes  
+    fields[2] = {3, 0, 1003, data_start + 24, 12}; // Field 1003: 12 bytes
 
-    std::cout << "Complex struct header: 0x" << std::hex << complexStruct->header << std::dec << std::endl;
-    std::cout << "Data type: " << (int)complexStruct->dataType << " (wstring)" << std::endl;
-    std::cout << "Data offset: " << complexStruct->dataOffset << std::endl;
-    std::cout << "Data length: " << complexStruct->dataLength << std::endl;
-    std::cout << "Expected string: " << testString.c_str() << std::endl;
+    // Calculate total size
+    header.totalSize = sizeof(VectorDataHeader) + sizeof(fields) + 8 + 16 + 12;
 
-    // Test student implementation
-    std::wstring result = extractWStringFromComplexStruct(complexStruct);
+    // Build the data vector
+    const uint8_t* headerPtr = reinterpret_cast<const uint8_t*>(&header);
+    data.insert(data.end(), headerPtr, headerPtr + sizeof(VectorDataHeader));
 
-    std::cout << "Extracted string: " << result.c_str() << std::endl;
-    bool passed = verifyResult(result == testString, "Correctly extracted wstring from complex struct");
+    const uint8_t* fieldsPtr = reinterpret_cast<const uint8_t*>(fields);
+    data.insert(data.end(), fieldsPtr, fieldsPtr + sizeof(fields));
 
-    delete[] buffer;
+    // Add field data
+    uint8_t field1Data[] = {0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88};
+    uint8_t field2Data[] = {
+        0xAA,
+        0xBB,
+        0xCC,
+        0xDD,
+        0xEE,
+        0xFF,
+        0x00,
+        0x11,
+        0x22,
+        0x33,
+        0x44,
+        0x55,
+        0x66,
+        0x77,
+        0x88,
+        0x99
+    };
+    uint8_t field3Data[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C};
+
+    data.insert(data.end(), field1Data, field1Data + 8);
+    data.insert(data.end(), field2Data, field2Data + 16);
+    data.insert(data.end(), field3Data, field3Data + 12);
+
+    std::cout << "Complex vector structure created with 3 fields" << std::endl;
+    std::cout << "Field 1001: 8 bytes, Field 1002: 16 bytes, Field 1003: 12 bytes" << std::endl;
+
+    // Test student implementation - extract field 1002
+    std::vector<uint8_t> result = extractVectorDataField(data, 1002);
+
+    std::cout << "Extracted field 1002 size: " << result.size() << std::endl;
+    bool passed = verifyResult(result.size() == 16, "Correct field size extracted");
+
+    if (passed)
+    {
+        // Verify the extracted data matches field2Data
+        bool dataCorrect = true;
+        for (size_t i = 0; i < 16; ++i)
+        {
+            if (result[i] != field2Data[i])
+            {
+                dataCorrect = false;
+                break;
+            }
+        }
+        passed &= verifyResult(dataCorrect, "Correct field data extracted");
+    }
 
     if (passed)
     {
@@ -1104,13 +1271,303 @@ void PointerArithmeticTask25::execute()
     }
 }
 
-// Task 26: Extract raw data from complex struct with length validation
+// Task 26: Multi-dimensional vector manipulation with pointer arithmetic
 std::string PointerArithmeticTask26::getDescription() const
+{
+    return
+            "Implement convertVectorToMatrix() to convert a 1D vector to a 2D matrix representation using pointer arithmetic";
+}
+
+void PointerArithmeticTask26::execute()
+{
+    displayTaskInfo();
+
+    // Create a 1D vector with 9 elements (3x3 matrix)
+    std::vector<uint32_t> data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    size_t rows = 3, cols = 3;
+
+    std::cout << "1D vector with " << data.size() << " elements" << std::endl;
+    std::cout << "Converting to " << rows << "x" << cols << " matrix" << std::endl;
+
+    VectorMatrix* matrix = nullptr;
+    VectorMatrix** matrixPtr = &matrix;
+
+    // Test student implementation
+    bool result = convertVectorToMatrix(data, rows, cols, matrixPtr);
+
+    if (result && matrix != nullptr)
+    {
+        std::cout << "Matrix conversion successful" << std::endl;
+        std::cout << "Matrix dimensions: " << matrix->rows << "x" << matrix->cols << std::endl;
+
+        bool passed = verifyResult(matrix->rows == rows, "Correct number of rows");
+        passed &= verifyResult(matrix->cols == cols, "Correct number of columns");
+        passed &= verifyResult(matrix->data.size() == data.size(), "Data size preserved");
+
+        if (passed)
+        {
+            // Verify data integrity
+            bool dataCorrect = true;
+            for (size_t i = 0; i < data.size(); ++i)
+            {
+                if (matrix->data[i] != data[i])
+                {
+                    dataCorrect = false;
+                    break;
+                }
+            }
+            passed &= verifyResult(dataCorrect, "Data integrity preserved");
+        }
+
+        if (passed)
+        {
+            std::cout << "\033[32m[SUCCESS]\033[0m Task 26 completed successfully!" << std::endl;
+        }
+        else
+        {
+            std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "\033[31m[FAILED]\033[0m Function returned false - implementation incomplete" << std::endl;
+    }
+
+    // Cleanup
+    if (matrix != nullptr)
+    {
+        delete matrix;
+    }
+}
+
+// Task 27: Complex vector serialization with nested structures
+std::string PointerArithmeticTask27::getDescription() const
+{
+    return "Implement serializeNestedStruct() to serialize a complex nested structure into a vector<uint8_t>";
+}
+
+void PointerArithmeticTask27::execute()
+{
+    displayTaskInfo();
+
+    // Create a nested structure
+    NestedStruct nested;
+    nested.id = 0x12345678;
+    nested.flags = 0xABCD;
+    nested.type = 42;
+    nested.reserved = 0;
+    nested.data = {100, 200, 300, 400, 500};
+
+    std::cout << "Nested structure created with ID: 0x" << std::hex << nested.id << std::dec << std::endl;
+    std::cout << "Data vector size: " << nested.data.size() << std::endl;
+
+    // Test student implementation
+    std::vector<uint8_t> result = serializeNestedStruct(nested);
+
+    std::cout << "Serialized data size: " << result.size() << std::endl;
+    bool passed = verifyResult(result.size() > 0, "Serialization produced data");
+
+    if (passed)
+    {
+        // Verify the serialized data can be deserialized correctly
+        // This is a basic verification - in a real scenario you'd have a deserialization function
+        size_t expectedSize = sizeof(uint32_t) + sizeof(uint16_t) + sizeof(uint8_t) + sizeof(uint8_t) +
+                sizeof(uint32_t) + nested.data.size() * sizeof(uint32_t);
+        passed &= verifyResult(result.size() == expectedSize, "Correct serialized size");
+    }
+
+    if (passed)
+    {
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 27 completed successfully!" << std::endl;
+    }
+    else
+    {
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
+    }
+}
+
+// Task 28: Vector-based binary tree serialization
+std::string PointerArithmeticTask28::getDescription() const
+{
+    return "Implement serializeBinaryTree() and deserializeBinaryTree() using vector<uint8_t>";
+}
+
+void PointerArithmeticTask28::execute()
+{
+    displayTaskInfo();
+
+    // Create a simple binary tree
+    BinaryTreeNode* root = new BinaryTreeNode{10, nullptr, nullptr};
+    root->left = new BinaryTreeNode{5, nullptr, nullptr};
+    root->right = new BinaryTreeNode{15, nullptr, nullptr};
+    root->left->left = new BinaryTreeNode{3, nullptr, nullptr};
+    root->left->right = new BinaryTreeNode{7, nullptr, nullptr};
+
+    std::cout << "Binary tree created with 5 nodes" << std::endl;
+
+    // Test student implementation - serialize
+    std::vector<uint8_t> serialized = serializeBinaryTree(root);
+
+    bool passed = verifyResult(serialized.size() > 0, "Serialization produced data");
+
+    if (passed)
+    {
+        // Test deserialization
+        BinaryTreeNode* deserialized = deserializeBinaryTree(serialized);
+        passed &= verifyResult(deserialized != nullptr, "Deserialization successful");
+
+        if (passed)
+        {
+            // Verify tree structure (basic check)
+            passed &= verifyResult(deserialized->value == 10, "Root value correct");
+            passed &= verifyResult(deserialized->left != nullptr, "Left child exists");
+            passed &= verifyResult(deserialized->right != nullptr, "Right child exists");
+        }
+
+        // Cleanup deserialized tree
+        if (deserialized != nullptr)
+        {
+            // Simple cleanup - in a real implementation you'd need proper tree traversal
+            delete deserialized->left->left;
+            delete deserialized->left->right;
+            delete deserialized->left;
+            delete deserialized->right;
+            delete deserialized;
+        }
+    }
+
+    if (passed)
+    {
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 28 completed successfully!" << std::endl;
+    }
+    else
+    {
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
+    }
+
+    // Cleanup original tree
+    delete root->left->left;
+    delete root->left->right;
+    delete root->left;
+    delete root->right;
+    delete root;
+}
+
+// Task 29: Complex vector data encryption
+std::string PointerArithmeticTask29::getDescription() const
+{
+    return "Implement encryptVectorData() and decryptVectorData() using XOR encryption";
+}
+
+void PointerArithmeticTask29::execute()
+{
+    displayTaskInfo();
+
+    // Create test data
+    std::vector<uint8_t> originalData = {0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xF0};
+    uint32_t key = 0x12345678;
+
+    std::cout << "Original data size: " << originalData.size() << " bytes" << std::endl;
+    std::cout << "Encryption key: 0x" << std::hex << key << std::dec << std::endl;
+
+    // Test student implementation - encrypt
+    EncryptedData encrypted = encryptVectorData(originalData, key);
+
+    bool passed = verifyResult(encrypted.key == key, "Key preserved");
+    passed &= verifyResult(encrypted.data.size() == originalData.size(), "Encrypted data size matches original");
+    passed &= verifyResult(encrypted.checksum > 0, "Checksum calculated");
+
+    if (passed)
+    {
+        // Test decryption
+        std::vector<uint8_t> decrypted = decryptVectorData(encrypted, key);
+        passed &= verifyResult(decrypted.size() == originalData.size(), "Decrypted size matches original");
+
+        if (passed)
+        {
+            // Verify data integrity
+            bool dataCorrect = true;
+            for (size_t i = 0; i < originalData.size(); ++i)
+            {
+                if (decrypted[i] != originalData[i])
+                {
+                    dataCorrect = false;
+                    break;
+                }
+            }
+            passed &= verifyResult(dataCorrect, "Decrypted data matches original");
+        }
+    }
+
+    if (passed)
+    {
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 29 completed successfully!" << std::endl;
+    }
+    else
+    {
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
+    }
+}
+
+// Task 30: Extract wstring from complex struct at data offset
+std::string PointerArithmeticTask30::getDescription() const
+{
+    return "Implement extractWStringFromComplexStruct() to extract a wstring from the data offset in a complex struct";
+}
+
+void PointerArithmeticTask30::execute()
+{
+    displayTaskInfo();
+
+    // Create a test wstring
+    std::wstring testString = L"Hello World from Complex Struct!";
+    size_t stringSize = testString.size() * sizeof(wchar_t);
+
+    // Allocate memory for struct + wstring data
+    uint8_t* buffer = new uint8_t[sizeof(ComplexStruct) + stringSize];
+    ComplexStruct* complexStruct = reinterpret_cast<ComplexStruct*>(buffer);
+
+    // Initialize the complex struct
+    complexStruct->header = 0x12345678;
+    complexStruct->flags = 0xABCD;
+    complexStruct->dataType = 1; // 1 = wstring data
+    complexStruct->dataOffset = 0; // Data starts immediately after struct
+    complexStruct->dataLength = stringSize;
+
+    // Copy the wstring data after the struct
+    uint8_t* dataPtr = buffer + sizeof(ComplexStruct);
+    std::memcpy(dataPtr, testString.data(), stringSize);
+
+    std::cout << "Complex struct header: 0x" << std::hex << complexStruct->header << std::dec << std::endl;
+    std::cout << "Data type: " << (int)complexStruct->dataType << " (wstring)" << std::endl;
+    std::cout << "Data length: " << complexStruct->dataLength << " bytes" << std::endl;
+    std::cout << "Expected string: " << testString.c_str() << std::endl;
+
+    // Test student implementation
+    std::wstring result = extractWStringFromComplexStruct(complexStruct);
+
+    std::cout << "Extracted string: " << result.c_str() << std::endl;
+    bool passed = verifyResult(result == testString, "Correctly extracted wstring from complex struct");
+
+    if (passed)
+    {
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 30 completed successfully!" << std::endl;
+    }
+    else
+    {
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
+    }
+
+    delete[] buffer;
+}
+
+// Task 31: Extract raw data from complex struct with length validation
+std::string PointerArithmeticTask31::getDescription() const
 {
     return "Implement extractRawDataFromComplexStruct() to extract raw data with length validation";
 }
 
-void PointerArithmeticTask26::execute()
+void PointerArithmeticTask31::execute()
 {
     displayTaskInfo();
 
@@ -1152,7 +1609,7 @@ void PointerArithmeticTask26::execute()
 
         if (passed)
         {
-            std::cout << "\033[32m[SUCCESS]\033[0m Task 26 completed successfully!" << std::endl;
+            std::cout << "\033[32m[SUCCESS]\033[0m Task 31 completed successfully!" << std::endl;
         }
         else
         {
@@ -1167,13 +1624,13 @@ void PointerArithmeticTask26::execute()
     delete[] buffer;
 }
 
-// Task 27: Extract wstring from nested struct traversal
-std::string PointerArithmeticTask27::getDescription() const
+// Task 32: Extract wstring from nested struct traversal
+std::string PointerArithmeticTask32::getDescription() const
 {
     return "Implement extractWStringFromNestedStruct() to extract wstring by traversing struct offsets";
 }
 
-void PointerArithmeticTask27::execute()
+void PointerArithmeticTask32::execute()
 {
     displayTaskInfo();
 
@@ -1223,7 +1680,7 @@ void PointerArithmeticTask27::execute()
 
     if (passed)
     {
-        std::cout << "\033[32m[SUCCESS]\033[0m Task 27 completed successfully!" << std::endl;
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 32 completed successfully!" << std::endl;
     }
     else
     {
@@ -1231,13 +1688,13 @@ void PointerArithmeticTask27::execute()
     }
 }
 
-// Task 28: Extract variable length data with offset calculation
-std::string PointerArithmeticTask28::getDescription() const
+// Task 33: Extract variable length data with offset calculation
+std::string PointerArithmeticTask33::getDescription() const
 {
     return "Implement extractVariableLengthData() to extract data using offset and length";
 }
 
-void PointerArithmeticTask28::execute()
+void PointerArithmeticTask33::execute()
 {
     displayTaskInfo();
 
@@ -1290,7 +1747,7 @@ void PointerArithmeticTask28::execute()
 
         if (passed)
         {
-            std::cout << "\033[32m[SUCCESS]\033[0m Task 28 completed successfully!" << std::endl;
+            std::cout << "\033[32m[SUCCESS]\033[0m Task 33 completed successfully!" << std::endl;
         }
         else
         {
@@ -1303,32 +1760,34 @@ void PointerArithmeticTask28::execute()
     }
 }
 
-// Task 29: Fix incorrect pointer type causing wrong data copy
-std::string PointerArithmeticTask29::getDescription() const
+// Task 34: Fix incorrect pointer type causing wrong data copy
+std::string PointerArithmeticTask34::getDescription() const
 {
-    return "Debug and fix copyDataFromBuffer() - wide character data is not being copied correctly from the source buffer";
+    return
+            "Debug and fix copyDataFromBuffer() - wide character data is not being copied correctly from the source buffer";
 }
 
-void PointerArithmeticTask29::execute()
+void PointerArithmeticTask34::execute()
 {
     displayTaskInfo();
 
     // Create test data with wide character content containing uppercase letters
     std::wstring testString = L"HELLO WORLD!";
     size_t wideCharSize = testString.size() * sizeof(wchar_t);
-    
+
     // Create source buffer with wide character data
     uint8_t sourceBuffer[50] = {0};
     std::memcpy(sourceBuffer, testString.data(), wideCharSize);
-    
+
     // Add some padding bytes after the wide character data
-    for (size_t i = wideCharSize; i < 50; ++i) {
+    for (size_t i = wideCharSize; i < 50; ++i)
+    {
         sourceBuffer[i] = static_cast<uint8_t>(i);
     }
 
     uint8_t destinationBuffer[50] = {0};
-    size_t offset = 0;  // Start from beginning of wide character data
-    size_t length = wideCharSize;  // Copy the entire wide character string
+    size_t offset = 0; // Start from beginning of wide character data
+    size_t length = wideCharSize; // Copy the entire wide character string
 
     std::cout << "Source contains wide character string: " << testString.c_str() << std::endl;
     std::cout << "Wide character size: " << wideCharSize << " bytes" << std::endl;
@@ -1341,16 +1800,17 @@ void PointerArithmeticTask29::execute()
 
     // Verify the copied data by reconstructing the wide character string
     std::wstring copiedString(reinterpret_cast<const wchar_t*>(destinationBuffer), testString.size());
-    
+
     std::cout << "Copied string: " << copiedString.c_str() << std::endl;
 
     // Check if the string was converted to lowercase
     std::wstring expectedLowercase = L"hello world!";
-    bool passed = verifyResult(copiedString == expectedLowercase, "Wide character data correctly copied and converted to lowercase");
+    bool passed = verifyResult(copiedString == expectedLowercase,
+                               "Wide character data correctly copied and converted to lowercase");
 
     if (passed)
     {
-        std::cout << "\033[32m[SUCCESS]\033[0m Task 29 completed successfully!" << std::endl;
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 34 completed successfully!" << std::endl;
     }
     else
     {
@@ -1359,13 +1819,13 @@ void PointerArithmeticTask29::execute()
     }
 }
 
-// Task 30: Fix wrong pointer offset in pointer-to-pointer scenario
-std::string PointerArithmeticTask30::getDescription() const
+// Task 35: Fix wrong pointer offset in pointer-to-pointer scenario
+std::string PointerArithmeticTask35::getDescription() const
 {
     return "Debug and fix readDataWithOffset() - the function is reading from the wrong memory location";
 }
 
-void PointerArithmeticTask30::execute()
+void PointerArithmeticTask35::execute()
 {
     displayTaskInfo();
 
@@ -1405,7 +1865,7 @@ void PointerArithmeticTask30::execute()
 
     if (passed)
     {
-        std::cout << "\033[32m[SUCCESS]\033[0m Task 30 completed successfully!" << std::endl;
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 35 completed successfully!" << std::endl;
     }
     else
     {
@@ -1413,13 +1873,13 @@ void PointerArithmeticTask30::execute()
     }
 }
 
-// Task 31: Fix incorrect dereferencing of uint8_t* to uint32_t
-std::string PointerArithmeticTask31::getDescription() const
+// Task 36: Fix incorrect dereferencing of uint8_t* to uint32_t
+std::string PointerArithmeticTask36::getDescription() const
 {
     return "Debug and fix readUint32FromBuffer() - the function is not correctly reading the uint32_t value";
 }
 
-void PointerArithmeticTask31::execute()
+void PointerArithmeticTask36::execute()
 {
     displayTaskInfo();
 
@@ -1467,7 +1927,7 @@ void PointerArithmeticTask31::execute()
 
     if (passed)
     {
-        std::cout << "\033[32m[SUCCESS]\033[0m Task 31 completed successfully!" << std::endl;
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 36 completed successfully!" << std::endl;
     }
     else
     {
@@ -1475,13 +1935,13 @@ void PointerArithmeticTask31::execute()
     }
 }
 
-// Task 32: Fix complex struct traversal and pointer arithmetic bug
-std::string PointerArithmeticTask32::getDescription() const
+// Task 37: Fix complex struct traversal and pointer arithmetic bug
+std::string PointerArithmeticTask37::getDescription() const
 {
     return "Debug and fix the struct traversal logic - data pointers are not being extracted correctly";
 }
 
-void PointerArithmeticTask32::execute()
+void PointerArithmeticTask37::execute()
 {
     displayTaskInfo();
 
@@ -1519,20 +1979,75 @@ void PointerArithmeticTask32::execute()
     }
 
     std::cout << "Created data structure with 3 blocks" << std::endl;
-    std::cout << "Block 0 data pointer: 0x" << std::hex << reinterpret_cast<uintptr_t>(blocks[0].dataPtr) << std::dec <<
-            std::endl;
+    for (int i = 0; i < 3; ++i)
+    {
+        std::cout << "Block " << i << " data pointer: 0x" << std::hex << reinterpret_cast<uintptr_t>(blocks[i].dataPtr)
+                << std::dec << std::endl;
+    }
 
     uint32_t resultCount = 0;
-    bool success = traverseDataStructure(buffer, structureSize, &resultCount);
+    uint32_t* results = nullptr;
+    bool success = traverseDataStructure(buffer, structureSize, &resultCount, &results);
 
     std::cout << "Traversal result: " << (success ? "SUCCESS" : "FAILED") << std::endl;
     std::cout << "Result count: " << resultCount << std::endl;
 
-    bool passed = verifyResult(success && resultCount == 3, "Data structure traversed correctly");
+    // Verify that the function extracted the correct number of pointers
+    bool countCorrect = (resultCount == 3);
+
+    // Verify that the extracted pointers match the expected values
+    bool pointersCorrect = true;
+    if (success && countCorrect && results)
+    {
+        // The processDataPointers function multiplies each pointer by 2
+        // So we need to check if the results match (original_pointer * 2)
+        uint32_t expectedResults[3];
+        for (int i = 0; i < 3; ++i)
+        {
+            expectedResults[i] = reinterpret_cast<uint32_t>(blocks[i].dataPtr) * 2;
+        }
+
+        // Verify that the actual results match the expected results
+        std::cout << "Verifying extracted pointer values:" << std::endl;
+        for (int i = 0; i < 3; ++i)
+        {
+            std::cout << "Block " << i << ": expected 0x" << std::hex << expectedResults[i]
+                    << ", got 0x" << results[i] << std::dec << std::endl;
+            if (results[i] != expectedResults[i])
+            {
+                pointersCorrect = false;
+                std::cout << "  -> MISMATCH!" << std::endl;
+                break;
+            }
+            else
+            {
+                std::cout << "  -> MATCH!" << std::endl;
+            }
+        }
+
+        if (pointersCorrect)
+        {
+            std::cout << "All pointer values extracted correctly!" << std::endl;
+        }
+    }
+    else if (success && countCorrect)
+    {
+        pointersCorrect = false;
+        std::cout << "Results pointer is null but function succeeded" << std::endl;
+    }
+
+    bool passed = verifyResult(success && countCorrect && pointersCorrect,
+                               "Data structure traversed correctly with proper pointer extraction");
+
+    // Clean up the results array
+    if (results)
+    {
+        delete[] results;
+    }
 
     if (passed)
     {
-        std::cout << "\033[32m[SUCCESS]\033[0m Task 32 completed successfully!" << std::endl;
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 37 completed successfully!" << std::endl;
     }
     else
     {
@@ -1542,13 +2057,13 @@ void PointerArithmeticTask32::execute()
     delete[] buffer;
 }
 
-// Task 33: Fix complex memory management and pointer validation bug
-std::string PointerArithmeticTask33::getDescription() const
+// Task 38: Fix complex memory management and pointer validation bug
+std::string PointerArithmeticTask38::getDescription() const
 {
     return "Debug and fix the memory management system - data blocks are not being allocated correctly";
 }
 
-void PointerArithmeticTask33::execute()
+void PointerArithmeticTask38::execute()
 {
     displayTaskInfo();
 
@@ -1622,7 +2137,7 @@ void PointerArithmeticTask33::execute()
 
     if (passed)
     {
-        std::cout << "\033[32m[SUCCESS]\033[0m Task 33 completed successfully!" << std::endl;
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 38 completed successfully!" << std::endl;
     }
     else
     {

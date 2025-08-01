@@ -2,7 +2,7 @@
 #include "Task.h"
 
 // Task 1: Pointer arithmetic with void pointers and casts
-class PointerArithmeticTask1 : public Task
+class Task1 : public Task
 {
 public:
     void execute() override;
@@ -10,7 +10,7 @@ public:
 };
 
 // Task 2: Pointer arithmetic with different integer types
-class PointerArithmeticTask2 : public Task
+class Task2 : public Task
 {
 public:
     void execute() override;
@@ -18,7 +18,7 @@ public:
 };
 
 // Task 3: Multi-dimensional array traversal with pointer arithmetic
-class PointerArithmeticTask3 : public Task
+class Task3 : public Task
 {
 public:
     void execute() override;
@@ -26,7 +26,7 @@ public:
 };
 
 // Task 4: Bit manipulation with pointer arithmetic
-class PointerArithmeticTask4 : public Task
+class Task4 : public Task
 {
 public:
     void execute() override;
@@ -34,7 +34,7 @@ public:
 };
 
 // Task 5: String manipulation with pointer arithmetic
-class PointerArithmeticTask5 : public Task
+class Task5 : public Task
 {
 public:
     void execute() override;
@@ -42,7 +42,7 @@ public:
 };
 
 // Task 6: Memory layout analysis with pointer arithmetic
-class PointerArithmeticTask6 : public Task
+class Task6 : public Task
 {
 public:
     void execute() override;
@@ -50,7 +50,7 @@ public:
 };
 
 // Task 7: Function pointer table traversal
-class PointerArithmeticTask7 : public Task
+class Task7 : public Task
 {
 public:
     void execute() override;
@@ -58,7 +58,7 @@ public:
 };
 
 // Task 8: First set bit search in uint32_t array
-class PointerArithmeticTask8 : public Task
+class Task8 : public Task
 {
 public:
     void execute() override;
@@ -66,7 +66,7 @@ public:
 };
 
 // Task 9: Basic pointer-to-pointer assignment
-class PointerArithmeticTask9 : public Task
+class Task9 : public Task
 {
 public:
     void execute() override;
@@ -74,7 +74,7 @@ public:
 };
 
 // Task 10: Search for pointer with specific bits set in array of pointers
-class PointerArithmeticTask10 : public Task
+class Task10 : public Task
 {
 public:
     void execute() override;
@@ -82,7 +82,7 @@ public:
 };
 
 // Task 11: Swap pointers using pointer-to-pointer
-class PointerArithmeticTask11 : public Task
+class Task11 : public Task
 {
 public:
     void execute() override;
@@ -90,7 +90,7 @@ public:
 };
 
 // Task 12: Return multiple values through pointer-to-pointer
-class PointerArithmeticTask12 : public Task
+class Task12 : public Task
 {
 public:
     void execute() override;
@@ -98,7 +98,7 @@ public:
 };
 
 // Task 13: Pointer-to-pointer with struct
-class PointerArithmeticTask13 : public Task
+class Task13 : public Task
 {
 public:
     void execute() override;
@@ -106,7 +106,7 @@ public:
 };
 
 // Task 14: Complex pointer-to-pointer linked list manipulation
-class PointerArithmeticTask14 : public Task
+class Task14 : public Task
 {
 public:
     void execute() override;
@@ -114,7 +114,7 @@ public:
 };
 
 // Task 15: Pointer-to-pointer dynamic array management
-class PointerArithmeticTask15 : public Task
+class Task15 : public Task
 {
 public:
     void execute() override;
@@ -122,7 +122,7 @@ public:
 };
 
 // Task 16: Complex pointer-to-pointer matrix manipulation
-class PointerArithmeticTask16 : public Task
+class Task16 : public Task
 {
 public:
     void execute() override;
@@ -132,7 +132,7 @@ public:
 // NEW TASKS: Vector Manipulation and Type Conversions
 
 // Task 17: Extract wstring from vector<uint8_t>
-class PointerArithmeticTask17 : public Task
+class Task17 : public Task
 {
 public:
     void execute() override;
@@ -140,7 +140,7 @@ public:
 };
 
 // Task 18: Create vector<uint8_t> from uint32_t
-class PointerArithmeticTask18 : public Task
+class Task18 : public Task
 {
 public:
     void execute() override;
@@ -148,7 +148,7 @@ public:
 };
 
 // Task 19: Extract uint32_t from vector<uint8_t>
-class PointerArithmeticTask19 : public Task
+class Task19 : public Task
 {
 public:
     void execute() override;
@@ -156,7 +156,7 @@ public:
 };
 
 // Task 20: Create vector<uint8_t> from POD struct
-class PointerArithmeticTask20 : public Task
+class Task20 : public Task
 {
 public:
     void execute() override;
@@ -164,7 +164,7 @@ public:
 };
 
 // Task 21: Extract POD struct from vector<uint8_t>
-class PointerArithmeticTask21 : public Task
+class Task21 : public Task
 {
 public:
     void execute() override;
@@ -172,7 +172,7 @@ public:
 };
 
 // Task 22: Convert vector<uint8_t> to vector<uint32_t>
-class PointerArithmeticTask22 : public Task
+class Task22 : public Task
 {
 public:
     void execute() override;
@@ -180,7 +180,7 @@ public:
 };
 
 // Task 23: Convert vector<uint32_t> to vector<uint8_t>
-class PointerArithmeticTask23 : public Task
+class Task23 : public Task
 {
 public:
     void execute() override;
@@ -188,7 +188,7 @@ public:
 };
 
 // Task 24: Insert wstring into vector<uint8_t> at offset
-class PointerArithmeticTask24 : public Task
+class Task24 : public Task
 {
 public:
     void execute() override;
@@ -198,7 +198,7 @@ public:
 // NEW COMPLEX VECTOR TASKS
 
 // Task 25: Complex vector data structure with variable-length fields
-class PointerArithmeticTask25 : public Task
+class Task25 : public Task
 {
 public:
     void execute() override;
@@ -206,7 +206,7 @@ public:
 };
 
 // Task 26: Multi-dimensional vector manipulation with pointer arithmetic
-class PointerArithmeticTask26 : public Task
+class Task26 : public Task
 {
 public:
     void execute() override;
@@ -214,7 +214,7 @@ public:
 };
 
 // Task 27: Complex vector serialization with nested structures
-class PointerArithmeticTask27 : public Task
+class Task27 : public Task
 {
 public:
     void execute() override;
@@ -222,7 +222,7 @@ public:
 };
 
 // Task 28: Vector-based binary tree serialization
-class PointerArithmeticTask28 : public Task
+class Task28 : public Task
 {
 public:
     void execute() override;
@@ -230,7 +230,7 @@ public:
 };
 
 // Task 29: Complex vector data encryption
-class PointerArithmeticTask29 : public Task
+class Task29 : public Task
 {
 public:
     void execute() override;
@@ -238,7 +238,7 @@ public:
 };
 
 // Task 30: Extract wstring from complex struct at data offset
-class PointerArithmeticTask30 : public Task
+class Task30 : public Task
 {
 public:
     void execute() override;
@@ -246,7 +246,7 @@ public:
 };
 
 // Task 31: Extract raw data from complex struct with length validation
-class PointerArithmeticTask31 : public Task
+class Task31 : public Task
 {
 public:
     void execute() override;
@@ -254,7 +254,7 @@ public:
 };
 
 // Task 32: Extract wstring from nested struct traversal
-class PointerArithmeticTask32 : public Task
+class Task32 : public Task
 {
 public:
     void execute() override;
@@ -262,7 +262,7 @@ public:
 };
 
 // Task 33: Extract variable length data with offset calculation
-class PointerArithmeticTask33 : public Task
+class Task33 : public Task
 {
 public:
     void execute() override;
@@ -270,7 +270,7 @@ public:
 };
 
 // Task 34: Fix incorrect pointer type causing wrong data copy
-class PointerArithmeticTask34 : public Task
+class Task34 : public Task
 {
 public:
     void execute() override;
@@ -278,7 +278,7 @@ public:
 };
 
 // Task 35: Fix wrong pointer offset in pointer-to-pointer scenario
-class PointerArithmeticTask35 : public Task
+class Task35 : public Task
 {
 public:
     void execute() override;
@@ -286,7 +286,7 @@ public:
 };
 
 // Task 36: Fix incorrect dereferencing of uint8_t* to uint32_t
-class PointerArithmeticTask36 : public Task
+class Task36 : public Task
 {
 public:
     void execute() override;
@@ -294,7 +294,7 @@ public:
 };
 
 // Task 37: Fix complex struct traversal and pointer arithmetic bug
-class PointerArithmeticTask37 : public Task
+class Task37 : public Task
 {
 public:
     void execute() override;
@@ -302,9 +302,9 @@ public:
 };
 
 // Task 38: Fix complex memory management and pointer validation bug
-class PointerArithmeticTask38 : public Task
+class Task38 : public Task
 {
 public:
     void execute() override;
     std::string getDescription() const override;
-};
+}; 

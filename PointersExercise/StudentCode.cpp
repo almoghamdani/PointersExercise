@@ -75,11 +75,17 @@ void assignValueThroughPointer(int** ptrToPtr, int value)
     // Your code here
 }
 
-// Task 10: Allocate memory through pointer-to-pointer
-// TODO: Implement this function to allocate memory and assign it through ptrToPtr
-void allocateMemory(int** ptrToPtr, int size)
+// Task 10: Search for pointer with specific bits set in array of pointers
+// TODO: Implement this function to search through an array of pointers to uint32_t
+// and find one that points to a value with specific bits set
+bool findPointerWithBitsSet(uint32_t** pointerArray,
+                            size_t size,
+                            uint32_t requiredBits,
+                            size_t* foundIndex,
+                            uint32_t* otherBitsSet)
 {
     // Your code here
+    return false;
 }
 
 // Task 11: Swap pointers using pointer-to-pointer
@@ -103,25 +109,28 @@ void insertNodeAtBeginning(Node** head, int value)
     // Your code here
 }
 
-// Task 14: Pointer-to-pointer array allocation
-// TODO: Implement this function to allocate a 2D array through pointer-to-pointer
-void allocate2DArray(int*** array2D, int rows, int cols)
+// Task 14: Complex pointer-to-pointer linked list manipulation
+// TODO: Implement this function to reverse a linked list in-place using pointer-to-pointer
+int reverseLinkedList(ListNode** head)
 {
     // Your code here
+    return 0;
 }
 
-// Task 15: Pointer-to-pointer function pointer
-// TODO: Implement this function to assign a function pointer based on choice
-void assignFunctionPointer(int (**funcPtr)(int), int choice)
+// Task 15: Pointer-to-pointer dynamic array management
+// TODO: Implement this function to add a value to a dynamic array, growing it if necessary
+bool addToDynamicArray(DynamicArray** array, int value)
 {
     // Your code here
+    return false;
 }
 
-// Task 16: Complex pointer-to-pointer arithmetic
-// TODO: Implement this function to advance a pointer-to-pointer-to-pointer by offset
-void advancePointerToPointer(int*** ptrToPtrToPtr, int offset)
+// Task 16: Complex pointer-to-pointer matrix manipulation
+// TODO: Implement this function to transpose a 2D matrix in-place using pointer arithmetic
+bool transposeMatrixInPlace(Matrix2D** matrix)
 {
     // Your code here
+    return false;
 }
 
 // Task 17: Extract wstring from vector<uint8_t>
@@ -187,7 +196,61 @@ void insertWStringIntoVector(std::vector<uint8_t>& data, const std::wstring& str
     // Your code here
 }
 
-// Task 25: Extract wstring from complex struct at data offset
+// Task 25: Complex vector data structure with variable-length fields
+// TODO: Implement this function to extract data from a complex vector structure
+std::vector<uint8_t> extractVectorDataField(const std::vector<uint8_t>& data, uint16_t fieldId)
+{
+    // Your code here
+    return std::vector<uint8_t>();
+}
+
+// Task 26: Multi-dimensional vector manipulation with pointer arithmetic
+// TODO: Implement this function to convert a 1D vector to a 2D matrix representation
+bool convertVectorToMatrix(const std::vector<uint32_t>& data, size_t rows, size_t cols, VectorMatrix** matrix)
+{
+    // Your code here
+    return false;
+}
+
+// Task 27: Complex vector serialization with nested structures
+// TODO: Implement this function to serialize a complex nested structure into a vector<uint8_t>
+std::vector<uint8_t> serializeNestedStruct(const NestedStruct& nested)
+{
+    // Your code here
+    return std::vector<uint8_t>();
+}
+
+// Task 28: Vector-based binary tree serialization
+// TODO: Implement this function to serialize a binary tree into a vector<uint8_t>
+std::vector<uint8_t> serializeBinaryTree(const BinaryTreeNode* root)
+{
+    // Your code here
+    return std::vector<uint8_t>();
+}
+
+// TODO: Implement this function to deserialize a binary tree from a vector<uint8_t>
+BinaryTreeNode* deserializeBinaryTree(const std::vector<uint8_t>& data)
+{
+    // Your code here
+    return nullptr;
+}
+
+// Task 29: Complex vector data encryption
+// TODO: Implement this function to encrypt vector data using XOR encryption
+EncryptedData encryptVectorData(const std::vector<uint8_t>& data, uint32_t key)
+{
+    // Your code here
+    return EncryptedData{std::vector<uint8_t>(), 0, 0};
+}
+
+// TODO: Implement this function to decrypt vector data
+std::vector<uint8_t> decryptVectorData(const EncryptedData& encrypted, uint32_t key)
+{
+    // Your code here
+    return std::vector<uint8_t>();
+}
+
+// Task 30: Extract wstring from complex struct at data offset
 // TODO: Implement this function to extract a wstring from a ComplexStruct where data follows after the struct
 std::wstring extractWStringFromComplexStruct(const ComplexStruct* structPtr)
 {
@@ -195,7 +258,7 @@ std::wstring extractWStringFromComplexStruct(const ComplexStruct* structPtr)
     return L"";
 }
 
-// Task 26: Extract raw data from complex struct with length validation
+// Task 31: Extract raw data from complex struct with length validation
 // TODO: Implement this function to extract raw data from a ComplexStruct where data follows after the struct
 std::vector<uint8_t> extractRawDataFromComplexStruct(const ComplexStruct* structPtr)
 {
@@ -203,7 +266,7 @@ std::vector<uint8_t> extractRawDataFromComplexStruct(const ComplexStruct* struct
     return std::vector<uint8_t>();
 }
 
-// Task 27: Extract wstring from nested struct traversal
+// Task 32: Extract wstring from nested struct traversal
 // TODO: Implement this function to extract a wstring by traversing to a ComplexStruct at structOffset where data follows after the struct
 std::wstring extractWStringFromNestedStruct(const void* basePtr, uint32_t structOffset)
 {
@@ -211,7 +274,7 @@ std::wstring extractWStringFromNestedStruct(const void* basePtr, uint32_t struct
     return L"";
 }
 
-// Task 28: Extract variable length data with offset calculation
+// Task 33: Extract variable length data with offset calculation
 // TODO: Implement this function to extract variable length data using offset and length from basePtr
 std::vector<uint8_t> extractVariableLengthData(const void* basePtr, uint32_t dataOffset, uint32_t dataLength)
 {
@@ -219,7 +282,7 @@ std::vector<uint8_t> extractVariableLengthData(const void* basePtr, uint32_t dat
     return std::vector<uint8_t>();
 }
 
-// Task 29: Fix incorrect pointer type causing wrong data copy
+// Task 34: Fix incorrect pointer type causing wrong data copy
 // TODO: Find and fix the bug in copyDataFromBuffer function
 void copyDataFromBuffer(uint8_t* destination, const uint8_t* source, size_t offset, size_t length)
 {
@@ -238,7 +301,7 @@ void copyDataFromBuffer(uint8_t* destination, const uint8_t* source, size_t offs
 
     // Cast to wide character pointer for processing wide character data
     wchar_t* sourcePtr = (wchar_t*)targetPos;
-    
+
     // Process wide characters and convert each letter to lowercase before copying
     size_t wideCharCount = length / sizeof(wchar_t);
     for (size_t i = 0; i < wideCharCount; ++i)
@@ -249,7 +312,7 @@ void copyDataFromBuffer(uint8_t* destination, const uint8_t* source, size_t offs
         {
             wideChar = wideChar + (L'a' - L'A');
         }
-        
+
         // Store the processed character
         std::memcpy(destination + (i * sizeof(wchar_t)), &wideChar, sizeof(wchar_t));
     }
@@ -267,7 +330,7 @@ void copyDataFromBuffer(uint8_t* destination, const uint8_t* source, size_t offs
     }
 }
 
-// Task 30: Fix wrong pointer offset in pointer-to-pointer scenario
+// Task 35: Fix wrong pointer offset in pointer-to-pointer scenario
 // TODO: Find and fix the bug in readDataWithOffset function
 uint32_t readDataWithOffset(uint32_t** dataPtr, size_t offset)
 {
@@ -307,7 +370,7 @@ uint32_t readDataWithOffset(uint32_t** dataPtr, size_t offset)
     return result;
 }
 
-// Task 31: Fix incorrect dereferencing of uint8_t* to uint32_t
+// Task 36: Fix incorrect dereferencing of uint8_t* to uint32_t
 // TODO: Find and fix the bug in readUint32FromBuffer function
 uint32_t readUint32FromBuffer(const uint8_t* buffer, size_t offset)
 {
@@ -351,16 +414,17 @@ uint32_t readUint32FromBuffer(const uint8_t* buffer, size_t offset)
     return result;
 }
 
-// Task 32: Fix complex struct traversal and pointer arithmetic bug
+// Task 37: Fix complex struct traversal and pointer arithmetic bug
 // TODO: Find and fix the bug in the struct traversal logic
-bool traverseDataStructure(const void* basePtr, uint32_t structureSize, uint32_t* resultCount)
+bool traverseDataStructure(const void* basePtr, uint32_t structureSize, uint32_t* resultCount, uint32_t** results)
 {
-    if (!basePtr || !resultCount)
+    if (!basePtr || !resultCount || !results)
     {
         return false;
     }
 
     *resultCount = 0;
+    *results = nullptr;
 
     // Cast to char* for byte-level access
     const char* charPtr = static_cast<const char*>(basePtr);
@@ -379,14 +443,16 @@ bool traverseDataStructure(const void* basePtr, uint32_t structureSize, uint32_t
     const DataBlock* blocks = reinterpret_cast<const DataBlock*>(blockArrayPtr);
 
     // Validate structure integrity
-    if (!validateStructureIntegrity(header, blocks, header->dataSize / sizeof(DataBlock)))
+    if (!validateStructureIntegrity(header, blocks, (structureSize - header->dataSize) / sizeof(DataBlock)))
     {
         return false;
     }
 
     // Extract data pointers
     uint32_t pointerCount = 0;
-    uint32_t* dataPointers = extractDataPointers(blocks, header->dataSize / sizeof(DataBlock), &pointerCount);
+    uint32_t* dataPointers = extractDataPointers(blocks,
+                                                 (structureSize - header->dataSize) / sizeof(DataBlock),
+                                                 &pointerCount);
 
     if (!dataPointers)
     {
@@ -394,18 +460,18 @@ bool traverseDataStructure(const void* basePtr, uint32_t structureSize, uint32_t
     }
 
     // Process the data pointers
-    uint32_t* results = new uint32_t[pointerCount];
-    if (!processDataPointers(dataPointers, pointerCount, results))
+    uint32_t* processedResults = new uint32_t[pointerCount];
+    if (!processDataPointers(dataPointers, pointerCount, processedResults))
     {
         delete[] dataPointers;
-        delete[] results;
+        delete[] processedResults;
         return false;
     }
 
     *resultCount = pointerCount;
+    *results = processedResults;
 
     delete[] dataPointers;
-    delete[] results;
 
     return true;
 }
@@ -424,6 +490,21 @@ bool validateStructureIntegrity(const DataHeader* header, const DataBlock* block
         totalDataSize += blocks[i].length;
     }
 
+    // Validate that data pointers are within reasonable bounds
+    for (uint32_t i = 0; i < count; ++i)
+    {
+        const uint8_t* dataPtr = blocks[i].dataPtr;
+        if (dataPtr && blocks[i].length > 0)
+        {
+            // Check if accessing the last byte would be valid
+            const uint8_t* endPtr = dataPtr + blocks[i].length;
+            if (endPtr < dataPtr)
+            {
+                return false;
+            }
+        }
+    }
+
     return totalDataSize == header->dataSize;
 }
 
@@ -439,7 +520,7 @@ uint32_t* extractDataPointers(const DataBlock* blocks, uint32_t count, uint32_t*
 
     for (uint32_t i = 0; i < count; ++i)
     {
-        pointers[i] = reinterpret_cast<uint32_t>(blocks[i].dataPtr);
+        pointers[i] = reinterpret_cast<uint32_t>(&blocks[i].dataPtr);
     }
 
     return pointers;
@@ -461,7 +542,7 @@ bool processDataPointers(uint32_t* pointers, uint32_t count, uint32_t* results)
     return true;
 }
 
-// Task 33: Fix complex memory management and pointer validation bug
+// Task 38: Fix complex memory management and pointer validation bug
 // TODO: Find and fix the bug in the memory management system
 bool allocateProcessingContext(ProcessingContext** context, size_t bufferSize)
 {

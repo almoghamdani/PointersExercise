@@ -39,20 +39,27 @@ void TaskManager::initializeTasks()
     tasks.push_back(std::make_unique<PointerArithmeticTask23>());
     tasks.push_back(std::make_unique<PointerArithmeticTask24>());
 
-    // Initialize new complex struct data extraction tasks
+    // Initialize new complex vector tasks
     tasks.push_back(std::make_unique<PointerArithmeticTask25>());
     tasks.push_back(std::make_unique<PointerArithmeticTask26>());
     tasks.push_back(std::make_unique<PointerArithmeticTask27>());
     tasks.push_back(std::make_unique<PointerArithmeticTask28>());
-
-    // Initialize new bug-fixing tasks
     tasks.push_back(std::make_unique<PointerArithmeticTask29>());
+
+    // Initialize complex struct data extraction tasks
     tasks.push_back(std::make_unique<PointerArithmeticTask30>());
     tasks.push_back(std::make_unique<PointerArithmeticTask31>());
-
-    // Initialize advanced complex bug-fixing tasks
     tasks.push_back(std::make_unique<PointerArithmeticTask32>());
     tasks.push_back(std::make_unique<PointerArithmeticTask33>());
+
+    // Initialize bug-fixing tasks
+    tasks.push_back(std::make_unique<PointerArithmeticTask34>());
+    tasks.push_back(std::make_unique<PointerArithmeticTask35>());
+    tasks.push_back(std::make_unique<PointerArithmeticTask36>());
+
+    // Initialize advanced complex bug-fixing tasks
+    tasks.push_back(std::make_unique<PointerArithmeticTask37>());
+    tasks.push_back(std::make_unique<PointerArithmeticTask38>());
 }
 
 void TaskManager::runAllTasks()
@@ -69,7 +76,8 @@ void TaskManager::runAllTasks()
         }
         catch (const std::exception& e)
         {
-            std::cout << "\033[31m[EXCEPTION]\033[0m Task " << (i + 1) << " threw an exception: " << e.what() << std::endl;
+            std::cout << "\033[31m[EXCEPTION]\033[0m Task " << (i + 1) << " threw an exception: " << e.what() <<
+                    std::endl;
             std::cout << "\033[31m[FAILED]\033[0m Task " << (i + 1) << " failed due to exception" << std::endl;
         }
         catch (...)
@@ -92,13 +100,15 @@ void TaskManager::runTask(int taskNumber)
         }
         catch (const std::exception& e)
         {
-            std::cout << "\033[31m[EXCEPTION]\033[0m Task " << taskNumber << " threw an exception: " << e.what() << std::endl;
+            std::cout << "\033[31m[EXCEPTION]\033[0m Task " << taskNumber << " threw an exception: " << e.what() <<
+                    std::endl;
             std::cout << "\033[31m[FAILED]\033[0m Task " << taskNumber << " failed due to exception" << std::endl;
         }
         catch (...)
         {
             std::cout << "\033[31m[EXCEPTION]\033[0m Task " << taskNumber << " threw an unknown exception" << std::endl;
-            std::cout << "\033[31m[FAILED]\033[0m Task " << taskNumber << " failed due to unknown exception" << std::endl;
+            std::cout << "\033[31m[FAILED]\033[0m Task " << taskNumber << " failed due to unknown exception" <<
+                    std::endl;
         }
     }
     else
