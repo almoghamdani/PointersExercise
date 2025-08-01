@@ -11,28 +11,38 @@ void* advanceVoidPointer(void* ptr, int bytes);
 // Task 2: Pointer arithmetic with different integer types
 int* castAndAdvance(char* ptr, int offset);
 
-// Task 3: Pointer arithmetic with character arrays
-char* advanceCharArrayPointer(char* ptr, int offset);
+// Task 3: Multi-dimensional array traversal with pointer arithmetic
+// Traverse a 2D array using pointer arithmetic and return the sum of diagonal elements
+int traverse2DArrayDiagonal(int** array2D, int rows, int cols);
 
-// Task 4: Complex pointer arithmetic with multiple casts
-double* complexPointerArithmetic(int* intPtr, long offset);
+// Task 4: Bit manipulation with pointer arithmetic
+// Set specific bits in a uint32_t array using pointer arithmetic
+void setBitsInArray(uint32_t* array, size_t size, uint32_t bitMask, size_t startIndex);
 
-// Task 5: Pointer arithmetic with struct pointers
-struct Point
+// Task 5: String manipulation with pointer arithmetic
+// Reverse a string in-place using pointer arithmetic
+void reverseStringInPlace(char* str);
+
+// Task 6: Memory layout analysis with pointer arithmetic
+// Analyze memory layout of a struct and extract specific fields
+struct MemoryLayoutStruct
 {
-    int x, y;
+    uint8_t flags;
+    uint16_t id;
+    uint32_t value;
+    uint64_t timestamp;
 };
 
-Point* advanceStructPointer(Point* ptr, int elements);
+uint32_t extractValueFromMemoryLayout(const void* memoryPtr, size_t offset);
 
-// Task 6: Pointer arithmetic with const pointers
-const int* advanceConstPointer(const int* ptr, int offset);
+// Task 7: Function pointer table traversal
+// Traverse an array of function pointers and execute them
+typedef int (*MathFunction)(int, int);
+int executeFunctionTable(MathFunction* funcTable, int size, int a, int b);
 
-// Task 7: Pointer arithmetic with volatile pointers
-volatile char* advanceVolatilePointer(volatile char* ptr, int bytes);
-
-// Task 8: Pointer arithmetic with array of pointers
-int** advancePointerArray(int** ptrArray, int index);
+// Task 8: First set bit search in uint32_t array
+// Find the first set bit in an array of uint32_t and return the byte index from start
+size_t findFirstSetBitIndex(const uint32_t* array, size_t size);
 
 // Task 9: Basic pointer-to-pointer assignment
 void assignValueThroughPointer(int** ptrToPtr, int value);

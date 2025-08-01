@@ -22,52 +22,50 @@ int* castAndAdvance(char* ptr, int offset)
     return nullptr;
 }
 
-// Task 3: Pointer arithmetic with character arrays
-// TODO: Implement this function to advance a character array pointer by offset
-char* advanceCharArrayPointer(char* ptr, int offset)
+// Task 3: Multi-dimensional array traversal with pointer arithmetic
+// TODO: Implement this function to traverse a 2D array diagonally using pointer arithmetic
+int traverse2DArrayDiagonal(int** array2D, int rows, int cols)
 {
     // Your code here
-    return nullptr;
+    return 0;
 }
 
-// Task 4: Complex pointer arithmetic with multiple casts
-// TODO: Implement this function to perform complex pointer arithmetic
-double* complexPointerArithmetic(int* intPtr, long offset)
+// Task 4: Bit manipulation with pointer arithmetic
+// TODO: Implement this function to set specific bits in a uint32_t array using pointer arithmetic
+void setBitsInArray(uint32_t* array, size_t size, uint32_t bitMask, size_t startIndex)
 {
     // Your code here
-    return nullptr;
 }
 
-// Task 5: Pointer arithmetic with struct pointers
-// TODO: Implement this function to advance a Point struct pointer by elements
-Point* advanceStructPointer(Point* ptr, int elements)
+// Task 5: String manipulation with pointer arithmetic
+// TODO: Implement this function to reverse a string using pointer arithmetic
+void reverseStringInPlace(char* str)
 {
     // Your code here
-    return nullptr;
 }
 
-// Task 6: Pointer arithmetic with const pointers
-// TODO: Implement this function to advance a const pointer by offset
-const int* advanceConstPointer(const int* ptr, int offset)
+// Task 6: Memory layout analysis with pointer arithmetic
+// TODO: Implement this function to extract uint32_t value from memory layout
+uint32_t extractValueFromMemoryLayout(const void* memoryPtr, size_t offset)
 {
     // Your code here
-    return nullptr;
+    return 0;
 }
 
-// Task 7: Pointer arithmetic with volatile pointers
-// TODO: Implement this function to advance a volatile pointer by bytes
-volatile char* advanceVolatilePointer(volatile char* ptr, int bytes)
+// Task 7: Function pointer table traversal
+// TODO: Implement this function to traverse and execute function pointers
+int executeFunctionTable(MathFunction* funcTable, int size, int a, int b)
 {
     // Your code here
-    return nullptr;
+    return 0;
 }
 
-// Task 8: Pointer arithmetic with array of pointers
-// TODO: Implement this function to advance in an array of pointers
-int** advancePointerArray(int** ptrArray, int index)
+// Task 8: First set bit search in uint32_t array
+// TODO: Implement this function to find first set bit and return byte index
+size_t findFirstSetBitIndex(const uint32_t* array, size_t size)
 {
     // Your code here
-    return nullptr;
+    return 0;
 }
 
 // Task 9: Basic pointer-to-pointer assignment

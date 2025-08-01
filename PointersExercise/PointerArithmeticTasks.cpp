@@ -4,6 +4,13 @@
 #include <cstring>
 #include <vector>
 #include <string>
+#include <iomanip>
+#include <cstddef>
+
+// Helper function for Task 3
+int testFunction1(int x) { return x * 2; }
+int testFunction2(int x) { return x + 10; }
+int testFunction3(int x) { return x - 5; }
 
 // Helper functions for Task 15
 int multiplyBy2(int x) { return x * 2; }
@@ -99,258 +106,238 @@ void PointerArithmeticTask2::execute()
     }
 }
 
-// Task 3: Pointer arithmetic with character arrays
+// Task 3: Multi-dimensional array traversal with pointer arithmetic
 std::string PointerArithmeticTask3::getDescription() const
 {
-    return "Implement advanceCharArrayPointer() to advance a character array pointer by offset";
+    return "Implement traverse2DArrayDiagonal() to traverse a 2D array diagonally using pointer arithmetic";
 }
 
 void PointerArithmeticTask3::execute()
 {
     displayTaskInfo();
 
-    char charArray[] = "Hello World!";
-    char* charPtr = charArray;
-    int offset = 6;
+    // Create a 3x3 2D array
+    int** array2D = new int*[3];
+    for (int i = 0; i < 3; ++i) {
+        array2D[i] = new int[3];
+        for (int j = 0; j < 3; ++j) {
+            array2D[i][j] = i * 3 + j + 1; // Fill with 1-9
+        }
+    }
 
-    std::cout << "Original character array: \"" << charArray << "\"" << std::endl;
-    std::cout << "Original pointer points to: '" << *charPtr << "'" << std::endl;
-    std::cout << "Offset: " << offset << " characters" << std::endl;
+    std::cout << "2D Array (3x3):" << std::endl;
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            std::cout << array2D[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << "Expected diagonal sum: 1 + 5 + 9 = 15" << std::endl;
 
     // Test student implementation
-    char* result = advanceCharArrayPointer(charPtr, offset);
+    int result = traverse2DArrayDiagonal(array2D, 3, 3);
 
-    if (result != nullptr)
+    std::cout << "Diagonal sum result: " << result << std::endl;
+    bool passed = verifyResult(result == 15, "Correct diagonal sum calculated");
+
+    if (passed)
     {
-        std::cout << "After advancing, pointer points to: '" << *result << "'" << std::endl;
-        std::cout << "String from new position: \"" << result << "\"" << std::endl;
-        bool passed = verifyResult(result == charPtr + offset, "Character pointer correctly advanced");
-        passed &= verifyResult(*result == 'W', "Pointer points to correct character ('W')");
-        passed &= verifyResult(strcmp(result, "World!") == 0, "String from new position is correct");
-
-        if (passed)
-        {
-            std::cout << "\033[32m[SUCCESS]\033[0m Task 3 completed successfully!" << std::endl;
-        }
-        else
-        {
-            std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
-        }
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 3 completed successfully!" << std::endl;
     }
     else
     {
-        std::cout << "\033[31m[FAILED]\033[0m Function returned nullptr - implementation incomplete" << std::endl;
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
     }
+
+    // Cleanup
+    for (int i = 0; i < 3; ++i) {
+        delete[] array2D[i];
+    }
+    delete[] array2D;
 }
 
-// Task 4: Complex pointer arithmetic with multiple casts
+// Task 4: Bit manipulation with pointer arithmetic
 std::string PointerArithmeticTask4::getDescription() const
 {
-    return "Implement complexPointerArithmetic() with multiple pointer type casts";
+    return "Implement setBitsInArray() to set specific bits in a uint32_t array using pointer arithmetic";
 }
 
 void PointerArithmeticTask4::execute()
 {
     displayTaskInfo();
 
-    char buffer[32];
-    double* doublePtr = reinterpret_cast<double*>(buffer);
-    doublePtr[0] = 1.1;
-    doublePtr[1] = 2.2;
-    doublePtr[2] = 3.3;
+    uint32_t array[4] = {0x00000000, 0x00000000, 0x00000000, 0x00000000};
+    uint32_t bitMask = 0x0000FF00; // Set bits 8-15
+    size_t startIndex = 1; // Start from second element
 
-    int* intPtr = reinterpret_cast<int*>(buffer);
-    long offset = 1;
-
-    std::cout << "Original int pointer points to buffer" << std::endl;
-    std::cout << "Offset: " << offset << " doubles" << std::endl;
+    std::cout << "Original array: ";
+    for (size_t i = 0; i < 4; ++i) {
+        std::cout << "0x" << std::hex << array[i] << " ";
+    }
+    std::cout << std::dec << std::endl;
+    std::cout << "Bit mask: 0x" << std::hex << bitMask << std::dec << std::endl;
+    std::cout << "Start index: " << startIndex << std::endl;
 
     // Test student implementation
-    double* result = complexPointerArithmetic(intPtr, offset);
+    setBitsInArray(array, 4, bitMask, startIndex);
 
-    if (result != nullptr)
+    std::cout << "After setting bits: ";
+    for (size_t i = 0; i < 4; ++i) {
+        std::cout << "0x" << std::hex << array[i] << " ";
+    }
+    std::cout << std::dec << std::endl;
+
+    bool passed = verifyResult(array[0] == 0x00000000, "First element unchanged");
+    passed &= verifyResult(array[1] == 0x0000FF00, "Second element has bits set");
+    passed &= verifyResult(array[2] == 0x0000FF00, "Third element has bits set");
+    passed &= verifyResult(array[3] == 0x0000FF00, "Fourth element has bits set");
+
+    if (passed)
     {
-        std::cout << "After complex arithmetic, pointer points to: " << *result << std::endl;
-        bool passed = verifyResult(result == doublePtr + offset, "Pointer correctly advanced with complex arithmetic");
-        passed &= verifyResult(*result == 2.2, "Pointer points to correct value (2.2)");
-
-        if (passed)
-        {
-            std::cout << "\033[32m[SUCCESS]\033[0m Task 4 completed successfully!" << std::endl;
-        }
-        else
-        {
-            std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
-        }
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 4 completed successfully!" << std::endl;
     }
     else
     {
-        std::cout << "\033[31m[FAILED]\033[0m Function returned nullptr - implementation incomplete" << std::endl;
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
     }
 }
 
-// Task 5: Pointer arithmetic with struct pointers
+// Task 5: String manipulation with pointer arithmetic
 std::string PointerArithmeticTask5::getDescription() const
 {
-    return "Implement advanceStructPointer() to advance a struct pointer by elements";
+    return "Implement reverseStringInPlace() to reverse a string using pointer arithmetic";
 }
 
 void PointerArithmeticTask5::execute()
 {
     displayTaskInfo();
 
-    Point points[] = {{1, 2}, {3, 4}, {5, 6}, {7, 8}};
-    Point* ptr = points;
-    int elements = 2;
-
-    std::cout << "Original struct pointer points to: (" << ptr->x << ", " << ptr->y << ")" << std::endl;
-    std::cout << "Advancing by " << elements << " elements..." << std::endl;
+    char str[] = "Hello World";
+    std::cout << "Original string: " << str << std::endl;
 
     // Test student implementation
-    Point* result = advanceStructPointer(ptr, elements);
+    reverseStringInPlace(str);
 
-    if (result != nullptr)
+    std::cout << "Reversed string: " << str << std::endl;
+    bool passed = verifyResult(strcmp(str, "dlroW olleH") == 0, "String correctly reversed");
+
+    if (passed)
     {
-        std::cout << "After advancing, pointer points to: (" << result->x << ", " << result->y << ")" << std::endl;
-        bool passed = verifyResult(result == ptr + elements, "Struct pointer correctly advanced");
-        passed &= verifyResult(result->x == 5 && result->y == 6, "Pointer points to correct struct (5, 6)");
-
-        if (passed)
-        {
-            std::cout << "\033[32m[SUCCESS]\033[0m Task 5 completed successfully!" << std::endl;
-        }
-        else
-        {
-            std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
-        }
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 5 completed successfully!" << std::endl;
     }
     else
     {
-        std::cout << "\033[31m[FAILED]\033[0m Function returned nullptr - implementation incomplete" << std::endl;
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
     }
 }
 
-// Task 6: Pointer arithmetic with const pointers
+// Task 6: Memory layout analysis with pointer arithmetic
 std::string PointerArithmeticTask6::getDescription() const
 {
-    return "Implement advanceConstPointer() to advance a const pointer by offset";
+    return "Implement extractValueFromMemoryLayout() to extract uint32_t value from memory layout";
 }
 
 void PointerArithmeticTask6::execute()
 {
     displayTaskInfo();
 
-    const int numbers[] = {10, 20, 30, 40, 50};
-    const int* ptr = numbers;
-    int offset = 3;
+    MemoryLayoutStruct data = {0x12, 0x3456, 0x789ABCDE, 0x123456789ABCDEF0};
+    size_t offset = offsetof(MemoryLayoutStruct, value); // Offset to value field
 
-    std::cout << "Original const pointer points to: " << *ptr << std::endl;
-    std::cout << "Offset: " << offset << std::endl;
+    std::cout << "Memory layout struct:" << std::endl;
+    std::cout << "flags: 0x" << std::hex << (int)data.flags << std::dec << std::endl;
+    std::cout << "id: 0x" << std::hex << data.id << std::dec << std::endl;
+    std::cout << "value: 0x" << std::hex << data.value << std::dec << std::endl;
+    std::cout << "timestamp: 0x" << std::hex << data.timestamp << std::dec << std::endl;
+    std::cout << "Offset to value field: " << offset << " bytes" << std::endl;
 
     // Test student implementation
-    const int* result = advanceConstPointer(ptr, offset);
+    uint32_t result = extractValueFromMemoryLayout(&data, offset);
 
-    if (result != nullptr)
+    std::cout << "Extracted value: 0x" << std::hex << result << std::dec << std::endl;
+    bool passed = verifyResult(result == 0x789ABCDE, "Correct value extracted from memory layout");
+
+    if (passed)
     {
-        std::cout << "After advancing, const pointer points to: " << *result << std::endl;
-        bool passed = verifyResult(result == ptr + offset, "Const pointer correctly advanced");
-        passed &= verifyResult(*result == 40, "Pointer points to correct value (40)");
-
-        if (passed)
-        {
-            std::cout << "\033[32m[SUCCESS]\033[0m Task 6 completed successfully!" << std::endl;
-        }
-        else
-        {
-            std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
-        }
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 6 completed successfully!" << std::endl;
     }
     else
     {
-        std::cout << "\033[31m[FAILED]\033[0m Function returned nullptr - implementation incomplete" << std::endl;
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
     }
 }
 
-// Task 7: Pointer arithmetic with volatile pointers
+// Task 7: Function pointer table traversal
 std::string PointerArithmeticTask7::getDescription() const
 {
-    return "Implement advanceVolatilePointer() to advance a volatile pointer by bytes";
+    return "Implement executeFunctionTable() to traverse and execute function pointers";
 }
 
 void PointerArithmeticTask7::execute()
 {
     displayTaskInfo();
 
-    volatile char buffer[] = {'A', 'B', 'C', 'D', 'E', 'F'};
-    volatile char* ptr = buffer;
-    int bytes = 3;
+    // Define math functions
+    auto add = [](int a, int b) -> int { return a + b; };
+    auto multiply = [](int a, int b) -> int { return a * b; };
+    auto subtract = [](int a, int b) -> int { return a - b; };
 
-    std::cout << "Original volatile pointer points to: '" << *ptr << "'" << std::endl;
-    std::cout << "Advancing by " << bytes << " bytes..." << std::endl;
+    MathFunction funcTable[] = {add, multiply, subtract};
+    int a = 10, b = 5;
+
+    std::cout << "Function table: [add, multiply, subtract]" << std::endl;
+    std::cout << "Input: a=" << a << ", b=" << b << std::endl;
+    std::cout << "Expected: add(10,5) + multiply(10,5) + subtract(10,5) = 15 + 50 + 5 = 70" << std::endl;
 
     // Test student implementation
-    volatile char* result = advanceVolatilePointer(ptr, bytes);
+    int result = executeFunctionTable(funcTable, 3, a, b);
 
-    if (result != nullptr)
+    std::cout << "Result: " << result << std::endl;
+    bool passed = verifyResult(result == 70, "Correct function table execution");
+
+    if (passed)
     {
-        std::cout << "After advancing, volatile pointer points to: '" << *result << "'" << std::endl;
-        bool passed = verifyResult(result == ptr + bytes, "Volatile pointer correctly advanced");
-        passed &= verifyResult(*result == 'D', "Pointer points to correct value ('D')");
-
-        if (passed)
-        {
-            std::cout << "\033[32m[SUCCESS]\033[0m Task 7 completed successfully!" << std::endl;
-        }
-        else
-        {
-            std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
-        }
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 7 completed successfully!" << std::endl;
     }
     else
     {
-        std::cout << "\033[31m[FAILED]\033[0m Function returned nullptr - implementation incomplete" << std::endl;
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
     }
 }
 
-// Task 8: Pointer arithmetic with array of pointers
+// Task 8: First set bit search in uint32_t array
 std::string PointerArithmeticTask8::getDescription() const
 {
-    return "Implement advancePointerArray() to advance in an array of pointers";
+    return "Implement findFirstSetBitIndex() to find first set bit and return byte index";
 }
 
 void PointerArithmeticTask8::execute()
 {
     displayTaskInfo();
 
-    int a = 10, b = 20, c = 30, d = 40;
-    int* ptrArray[] = {&a, &b, &c, &d};
-    int** ptr = ptrArray;
-    int index = 2;
+    uint32_t array[] = {0x00000000, 0x00000000, 0x00000008, 0x00000000}; // Bit 3 set in third element
+    size_t size = 4;
 
-    std::cout << "Original pointer array points to: " << **ptr << std::endl;
-    std::cout << "Index: " << index << std::endl;
+    std::cout << "Array: ";
+    for (size_t i = 0; i < size; ++i) {
+        std::cout << "0x" << std::hex << array[i] << " ";
+    }
+    std::cout << std::dec << std::endl;
+    std::cout << "Expected: First set bit is at bit 67 (byte 8 + 3 = 11)" << std::endl;
 
     // Test student implementation
-    int** result = advancePointerArray(ptr, index);
+    size_t result = findFirstSetBitIndex(array, size);
 
-    if (result != nullptr)
+    std::cout << "First set bit found at byte index: " << result << std::endl;
+    bool passed = verifyResult(result == 11, "Correct byte index for first set bit");
+
+    if (passed)
     {
-        std::cout << "After advancing, pointer array points to: " << **result << std::endl;
-        bool passed = verifyResult(result == ptr + index, "Pointer array correctly advanced");
-        passed &= verifyResult(**result == 30, "Pointer points to correct value (30)");
-
-        if (passed)
-        {
-            std::cout << "\033[32m[SUCCESS]\033[0m Task 8 completed successfully!" << std::endl;
-        }
-        else
-        {
-            std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
-        }
+        std::cout << "\033[32m[SUCCESS]\033[0m Task 8 completed successfully!" << std::endl;
     }
     else
     {
-        std::cout << "\033[31m[FAILED]\033[0m Function returned nullptr - implementation incomplete" << std::endl;
+        std::cout << "\033[31m[FAILED]\033[0m Task failed - check your implementation" << std::endl;
     }
 }
 

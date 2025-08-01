@@ -17,7 +17,7 @@ public:
     std::string getDescription() const override;
 };
 
-// Task 3: Pointer arithmetic with character arrays
+// Task 3: Multi-dimensional array traversal with pointer arithmetic
 class PointerArithmeticTask3 : public Task
 {
 public:
@@ -25,7 +25,7 @@ public:
     std::string getDescription() const override;
 };
 
-// Task 4: Complex pointer arithmetic with multiple casts
+// Task 4: Bit manipulation with pointer arithmetic
 class PointerArithmeticTask4 : public Task
 {
 public:
@@ -33,7 +33,7 @@ public:
     std::string getDescription() const override;
 };
 
-// Task 5: Pointer arithmetic with struct pointers
+// Task 5: String manipulation with pointer arithmetic
 class PointerArithmeticTask5 : public Task
 {
 public:
@@ -41,7 +41,7 @@ public:
     std::string getDescription() const override;
 };
 
-// Task 6: Pointer arithmetic with const pointers
+// Task 6: Memory layout analysis with pointer arithmetic
 class PointerArithmeticTask6 : public Task
 {
 public:
@@ -49,7 +49,7 @@ public:
     std::string getDescription() const override;
 };
 
-// Task 7: Pointer arithmetic with volatile pointers
+// Task 7: Function pointer table traversal
 class PointerArithmeticTask7 : public Task
 {
 public:
@@ -57,7 +57,7 @@ public:
     std::string getDescription() const override;
 };
 
-// Task 8: Pointer arithmetic with array of pointers
+// Task 8: First set bit search in uint32_t array
 class PointerArithmeticTask8 : public Task
 {
 public:

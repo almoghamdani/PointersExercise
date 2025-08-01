@@ -19,47 +19,6 @@ PointersExercise/
 └── TEACHER_GUIDE.md           # Teacher's guide with hints and solutions
 ```
 
-## 📚 Available Tasks
-
-### Task 1: Void Pointers and Casts
-- **Objective**: Implement `advanceVoidPointer()` to advance a void pointer by bytes using casts
-- **Learning Focus**: Working with void pointers and type casting
-- **Difficulty**: Intermediate
-
-### Task 2: Pointer Type Casting
-- **Objective**: Implement `castAndAdvance()` to cast char* to int* and advance by offset
-- **Learning Focus**: Type casting between different pointer types
-- **Difficulty**: Intermediate
-
-### Task 3: Function Pointers
-- **Objective**: Implement `advanceFunctionPointer()` to advance a function pointer by offset
-- **Learning Focus**: Function pointer arithmetic and casting
-- **Difficulty**: Advanced
-
-### Task 4: Complex Pointer Arithmetic
-- **Objective**: Implement `complexPointerArithmetic()` with multiple pointer type casts
-- **Learning Focus**: Complex casting operations and multi-step pointer arithmetic
-- **Difficulty**: Advanced
-
-### Task 5: Struct Pointers
-- **Objective**: Implement `advanceStructPointer()` to advance a struct pointer by elements
-- **Learning Focus**: Pointer arithmetic with user-defined types
-- **Difficulty**: Intermediate
-
-### Task 6: Const Pointers
-- **Objective**: Implement `advanceConstPointer()` to advance a const pointer by offset
-- **Learning Focus**: Working with const-correctness in pointer arithmetic
-- **Difficulty**: Intermediate
-
-### Task 7: Volatile Pointers
-- **Objective**: Implement `advanceVolatilePointer()` to advance a volatile pointer by bytes
-- **Learning Focus**: Understanding volatile qualifiers in pointer operations
-- **Difficulty**: Advanced
-
-### Task 8: Array of Pointers
-- **Objective**: Implement `advancePointerArray()` to advance in an array of pointers
-- **Learning Focus**: Multi-level pointer arithmetic
-- **Difficulty**: Advanced
 
 ## 🚀 How to Use
 
@@ -121,12 +80,12 @@ After completing these exercises, students should understand:
 
 1. **Void Pointer Operations**: Working with void pointers and type casting
 2. **Type Casting**: Converting between different pointer types safely
-3. **Function Pointers**: Understanding function pointer arithmetic
-4. **Complex Casting**: Multi-step pointer type conversions
-5. **Qualified Pointers**: Working with const and volatile pointers
-6. **Struct Pointers**: Pointer arithmetic with user-defined types
-7. **Multi-level Pointers**: Working with arrays of pointers
-8. **Memory Layout**: Understanding how different types are laid out in memory
+3. **Multi-dimensional Arrays**: Traversing 2D arrays using pointer arithmetic
+4. **Bit Manipulation**: Combining bit operations with pointer arithmetic
+5. **String Manipulation**: In-place string algorithms using pointers
+6. **Memory Layout Analysis**: Understanding struct layouts and offset calculations
+7. **Function Pointer Tables**: Working with arrays of function pointers
+8. **Bit Scanning Algorithms**: Finding specific bits in data structures
 9. **Pointer-to-Pointer**: Using multi-level indirection for output parameters
 10. **Vector Manipulation**: Converting between different data types and raw memory
 11. **Complex Struct Access**: Extracting variable-length data from structured memory
@@ -154,9 +113,12 @@ To add new tasks:
 ## 📝 Advanced Concepts Covered
 
 - **Type Casting**: `static_cast`, `reinterpret_cast`, `const_cast`
-- **Pointer Types**: `void*`, `const*`, `volatile*`, function pointers
-- **Qualifiers**: `const`, `volatile` in pointer contexts
-- **Complex Types**: Struct pointers, arrays of pointers
+- **Pointer Types**: `void*`, function pointers, multi-dimensional arrays
+- **Bit Operations**: Bit manipulation combined with pointer arithmetic
+- **String Algorithms**: In-place string manipulation using pointers
+- **Memory Layout**: Struct layouts, offset calculations, and field extraction
+- **Function Pointers**: Arrays of function pointers and dynamic execution
+- **Bit Scanning**: Finding specific bits in data structures
 - **Memory Operations**: Byte-level pointer arithmetic
 - **Type Safety**: Proper casting between different pointer types
 - **Pointer-to-Pointer**: Multi-level indirection and output parameters
