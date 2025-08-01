@@ -11,7 +11,7 @@
 void* advanceVoidPointer(void* ptr, int bytes)
 {
     // Your code here
-    return nullptr; // Replace this with your implementation
+    return nullptr;
 }
 
 // Task 2: Pointer arithmetic with different integer types
@@ -19,7 +19,7 @@ void* advanceVoidPointer(void* ptr, int bytes)
 int* castAndAdvance(char* ptr, int offset)
 {
     // Your code here
-    return nullptr; // Replace this with your implementation
+    return nullptr;
 }
 
 // Task 3: Pointer arithmetic with function pointers
@@ -27,7 +27,7 @@ int* castAndAdvance(char* ptr, int offset)
 int (* advanceFunctionPointer(int (*funcPtr)(int), int offset))(int)
 {
     // Your code here
-    return nullptr; // Replace this with your implementation
+    return nullptr;
 }
 
 // Task 4: Complex pointer arithmetic with multiple casts
@@ -35,7 +35,7 @@ int (* advanceFunctionPointer(int (*funcPtr)(int), int offset))(int)
 double* complexPointerArithmetic(int* intPtr, long offset)
 {
     // Your code here
-    return nullptr; // Replace this with your implementation
+    return nullptr;
 }
 
 // Task 5: Pointer arithmetic with struct pointers
@@ -43,7 +43,7 @@ double* complexPointerArithmetic(int* intPtr, long offset)
 Point* advanceStructPointer(Point* ptr, int elements)
 {
     // Your code here
-    return nullptr; // Replace this with your implementation
+    return nullptr;
 }
 
 // Task 6: Pointer arithmetic with const pointers
@@ -51,7 +51,7 @@ Point* advanceStructPointer(Point* ptr, int elements)
 const int* advanceConstPointer(const int* ptr, int offset)
 {
     // Your code here
-    return nullptr; // Replace this with your implementation
+    return nullptr;
 }
 
 // Task 7: Pointer arithmetic with volatile pointers
@@ -59,7 +59,7 @@ const int* advanceConstPointer(const int* ptr, int offset)
 volatile char* advanceVolatilePointer(volatile char* ptr, int bytes)
 {
     // Your code here
-    return nullptr; // Replace this with your implementation
+    return nullptr;
 }
 
 // Task 8: Pointer arithmetic with array of pointers
@@ -67,7 +67,7 @@ volatile char* advanceVolatilePointer(volatile char* ptr, int bytes)
 int** advancePointerArray(int** ptrArray, int index)
 {
     // Your code here
-    return nullptr; // Replace this with your implementation
+    return nullptr;
 }
 
 // Task 9: Basic pointer-to-pointer assignment
